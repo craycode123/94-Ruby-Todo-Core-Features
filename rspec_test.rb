@@ -1,13 +1,14 @@
 require 'rspec'
-require_relative 'generating_anagrams'
-describe "generating_anagrams.rb" do
-  describe "#anagrams_for" do
-    let(:word) { 'Cesar' }
-    let(:dictionary) { ['acres', 'cares', 'Cesar', 'races', 'smelt', 'melts', 'etlsm'] }
-    let(:anagrams) { ['acres', 'cares', 'Cesar', 'races'] }
+require "dictionary_sort.rb"
 
-    it "returns an array of anagrams for the word based on the dictionary array" do
-      expect(anagrams_for(word, dictionary)).to eq anagrams
+describe "dictionary_sort.rb" do
+  describe "#run" do
+    context "when user inputs a list of movies \(Iron Man, Captain America, Spider Man\) and presses Enter" do
+      it "should print the movies in alphabetical order" do
+        allow_any_instance_of(Kernel).to receive(:gets).and_return("Iron Man", "Captain America", "Spider Man", "")
+        regex = /Captain America\nIron Man\nSpider Man/
+        expect{run}.to output(regex).to_stdout
+      end
     end
   end
 end
