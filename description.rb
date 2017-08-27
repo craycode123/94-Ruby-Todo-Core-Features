@@ -1,19 +1,13 @@
-<div><p>Inheritance is a design pattern that can be found in almost every modern programming language in some form or another.</p>
-<p>If you’re not sure why inheritance is important or useful, just think about why we have DNA.&nbsp;</p>
-<p>Here’s a simple explanation from <a href="http://pragprog.com/book/ruby3/programming-ruby-1-9">Programming Ruby</a>&nbsp;(a.k.a. the <em>Pickaxe</em>):</p>
-<blockquote><p>Inheritance allows you to create a class that is a refinement or specialization of another class. This class is called a <strong>subclass</strong> of the original, and the original is a <strong>superclass</strong> of the subclass. People also talk of <strong>child</strong> and <strong>parent</strong> classes.The basic mechanism of subclassing is simple. The child inherits all of the capabilities of its parent class—all the parent’s instance methods are available in instances of the child.</p>
-</blockquote>
-<p>Additionally, you may want to <a href="http://rubylearning.com/satishtalim/ruby_inheritance.html">read about class inheritance in Ruby</a>&nbsp;to get a sense for how it works.</p>
+<div><p>Vroom vroom! We’re going to build a simple game called <em>Ruby Racer</em>. This is a “game” like <a href="http://en.wikipedia.org/wiki/Snakes_and_Ladders">Snakes and Ladders</a>&nbsp;: the fixed board layout and random rolls of the dice completely determine the outcome.</p>
+<p>The game works like a (random and much quieter) drag race. There are two players. Each starts with a “car” sitting at the beginning of the track, side-by-side. The track is <code class="inline">N</code> squares long. Players take turns rolling a die and advance their car according to the value of the roll.</p>
+<p>Note that this challenge is about modeling a simple game with little human interaction and no strategy. You’ll learn a bit about how console output works when you have to print the board. The starting code is well-written, so pay attention to the style, what methods exist, what their inputs and return values are, and how they segment the actions necessary to “play” the game.</p>
 <h3>Objectives</h3>
-<h4>A bunch of animals</h4>
-<p>Define 7 empty classes: <code class="inline">Animal</code> <code class="inline">Mammal</code>, <code class="inline">Amphibian</code>, <code class="inline">Primate</code>, <code class="inline">Frog</code>, <code class="inline">Bat</code>, and <code class="inline">Chimpanzee</code>.</p>
-<p>Set up an inheritance structure that makes sense given the phylogenetic position of the animal in relation to the others.  </p>
-<h4>Add some properties</h4>
-<p>Add instance variables and methods to your different classes. These could include things like <code class="inline">@num_legs</code> or <code class="inline">warm_blooded?</code>. Make up your own.</p>
-<p>The write a script to prove that your inheritance structure works. If you assign <code class="inline">@num_legs = 2</code> in the <code class="inline">Primate</code> class, does an instance of <code class="inline">Chimpanzee</code> have the same variable and value?</p>
-<p>Hint: you may have to define some reader methods.  </p>
-<h4>Extra Credit: Super powers with a Module</h4>
-<p>This objective is really just for fun.</p>
-<p>Create a module <code class="inline">SuperPowers</code> with some crazy (and perfectly useless) features like a <code class="inline">use_laser_vision</code> method and a <code class="inline">magic_points</code> reader and writer method.</p>
-<p>Then use your module as a mixin for one or more of your classes.</p>
+<h4>Implement Using the Skeleton Code</h4>
+<p>The source gist for this challenge contains a lot of skeleton code; use it! You should mostly be filling out the pre-defined <code class="inline">RubyRacer</code> class, although feel free to dress up the output and have a little fun with the logic of the game. Maybe add some totally sweet <a href="https://github.com/miketierney/artii">ACSII art</a>?</p>
+<p>Here’s what the output should look like, roughly:</p>
+<p><iframe style="margin: 0 auto; display: block;" src="//www.youtube.com/embed/FzZYE6drMxQ?hd=1&amp;showinfo=0" width="560" height="349" frameborder="0" allowfullscreen=""></iframe></p>
+<p><strong>Note</strong> : Are you assuming there are only two players and they’re always labeled <code class="inline">'a'</code> and <code class="inline">'b'</code>? Why? If it’s intentional as a means to get a simpler version up and running, that’s fine, but it’s important to be clear about what assumptions your program is making and why! Try to write a version that accepts any number of players (identified by single characters) as input.  </p>
+<h4>Think of Fun Additions</h4>
+<p>As a thought experiment, think about what would make this game more fun? Powerups? Landmines that send you back to the start? More player control?</p>
+<p>Is your code well-suited to adding these features or would it be difficult?</p>
 </div>
