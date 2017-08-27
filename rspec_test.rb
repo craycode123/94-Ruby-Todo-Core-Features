@@ -1,59 +1,99 @@
 require 'rspec'
-require_relative 'parser'
-describe "Person" do
-  let(:person) { Person.new(id: 201, first_name: "Jane", last_name: "Doe", email: "jane_doe@gmail.com", phone_number: "2020202") }
+require_relative 'todo'
 
-  it "should have attributes: id, first_name, last_name, email, phone_number, created_at" do
-    expect(person.id).not_to be_nil
-    expect(person.first_name).not_to be_nil
-    expect(person.last_name).not_to be_nil
-    expect(person.phone_number).not_to be_nil
-    expect(person.email).not_to be_nil
-    expect(person.created_at).not_to be_nil
+describe "Task" do
+  let(:task) { Task.new("Complete Ruby Challenges") }
+
+  describe "#initialize" do
+    it "should create a new Task object with attributes :title & :completed" do
+      expect(task).to be_a Task
+      expect(task).to respond_to :title
+      expect(task.title).to eq "Complete Ruby Challenges"
+      expect(task).to respond_to :completed
+      expect(task.completed).to eq false
+    end
   end
 end
 
-describe "PersonParser" do
-  let(:parser) { PersonParser.new("people.csv") }
-  let(:person) { Person.new(id: 201, first_name: "Jane", last_name: "Doe", email: "jane_doe@gmail.com", phone_number: "2020202") }
+describe "List" do
+  let(:list) { List.new("todo_test.csv") }
+  let(:add_tasks) do
+    list.add("Walk the dog")
+    list.add("Complete Ruby Challenges")
+  end
 
-  describe "#people method" do
-    it "should return an array of Person objects" do
-      expect(parser.people).to be_an Array
-      random_person = parser.people.sample
-      expect(random_person).to be_a Person
-      expect(random_person.instance_variables).to eq [:@id, :@first_name, :@last_name, :@email, :@phone_number, :@created_at]
+  before(:each) do
+    File.new("todo_test.csv", "w")
+    list.tasks = []
+  end
+
+  describe "#initialize" do
+    it "should take in 1 argument: csv file_name" do
+      expect{ List.new }.to raise_error ArgumentError
+      expect{ list }.not_to raise_error
+    end
+
+    it "should create a List object with attributes :file & :tasks" do
+      expect(list).to be_a List
+      expect(list).to respond_to :file
+      expect(list).to respond_to :tasks
     end
   end
 
-  describe "#add_person method" do
-    it "should take in a Person object" do
-      parser.people
-      expect{ parser.add_person }.to raise_error ArgumentError
-      expect{ parser.add_person(person) }.not_to raise_error
+  describe "#add" do
+    it "should take in a string, create a Task object and push it into attribute :tasks" do
+      prev_count = list.tasks.size
+      list.add("Walk the dog")
+      current_count = list.tasks.size
+
+      expect(current_count - prev_count).to eq 1
+      expect(list.tasks.last).to be_a Task
+      expect(list.tasks.last.title).to eq "Walk the dog"
     end
 
-    it "should increase @people array by 1" do
-      parser.people
-      initial_count = parser.people.size
-      parser.add_person(person)
-      current_count = parser.people.size
-      expect( current_count - initial_count ).to eq 1
+    it "should append a new line into csv file" do
+      original_rows = CSV.readlines("todo_test.csv").size
+      list.add("Walk the dog")
+      current_rows = CSV.readlines("todo_test.csv").size
+
+      expect(current_rows - original_rows ).to eq 1
     end
   end
 
-  describe "#save method" do
-    it "should save all @people into csv file" do
-      original_rows = File.readlines("people.csv").size
-      parser.people
-      parser.add_person(person)
-      parser.save
-      current_rows = File.readlines("people.csv").size
-      expect(current_rows - original_rows).to eq 1
+  describe "#tasks" do
+    it "should return all tasks in that list" do
+      add_tasks
+      expect(list.tasks).to be_an Array
+      expect(list.tasks.size).to eq 2
+    end
+  end
 
-      # clean up so that there're no confusion for students
-      parser.people.delete_at(-1)
-      parser.save
+  describe "#delete" do
+    it "should receive task number and remove from attribute :tasks array" do
+      add_tasks
+      prev_count = list.tasks.size
+      list.delete(1)
+      current_count = list.tasks.size
+
+      expect(prev_count - current_count).to eq 1
+    end
+
+    it "should remove a line from csv file" do
+      add_tasks
+      original_rows = CSV.readlines("todo_test.csv").size
+      list.delete(1)
+      current_rows = CSV.readlines("todo_test.csv").size
+
+      expect(original_rows - current_rows).to eq 1
+    end
+  end
+
+  describe "#complete" do
+    it "should receive task number and complete the task" do
+      add_tasks
+      list.complete(1)
+
+      expect(list.tasks.first.completed).to eq true
     end
   end
 end
