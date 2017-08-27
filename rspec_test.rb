@@ -1,28 +1,17 @@
 require 'rspec'
-require_relative 'pig_latin.rb'
+require_relative 'method_chaining'
 
-describe "pig_latin.rb" do
-  describe "convert_word_to_pig_latin(\"hello\")" do
-    it "should return \`ellohay\`" do
-      expect(convert_word_to_pig_latin("hello")).to eq "ellohay"
+describe "method_chaining.rb" do
+  describe "shout_backwards(\"hello, boot\")" do
+    it "should return \"TOOB, OLLEH\"" do
+      expect( shout_backwards("hello, boot") ).to eq "TOOB ,OLLEH!!!"
     end
   end
 
-  describe "convert_word_to_pig_latin(\"aye\")" do
-    it "should return \`aye\`" do
-      expect(convert_word_to_pig_latin("aye")).to eq "aye"
-    end
-  end
+  describe "#squared_primes([1, 3, 4, 7, 42])" do
 
-  describe "convert_sentence_to_pig_latin(\"hello world\")" do
-    it "should return \"ellohay orldway\"" do
-      expect(convert_sentence_to_pig_latin("hello world")).to eq "ellohay orldway"
-    end
-  end
-
-  describe "convert_sentence_to_pig_latin(\"aye sir\")" do
-    it "should return \"aye irsay\"" do
-      expect(convert_sentence_to_pig_latin("aye sir")).to eq "aye irsay"
+    it "should return [1, 9, 49]" do
+      expect(squared_primes([1, 3, 4, 7, 42])).to eq [1, 9, 49]
     end
   end
 end
