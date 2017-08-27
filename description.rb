@@ -1,49 +1,32 @@
-<div><p>Scope can be a difficult concept to grasp.</p>
-<p>Do you know the ins and outs of how constants, global variables, class variables, instance variables, and local variables work? How about the difference between class methods and instance methods? What about methods defined within a module?</p>
-<p>Examples:
-  Constants =&gt; User (Capitalised), Global variables =&gt; $, Class variables =&gt; @@, Instance variables =&gt; @, Local variables =&gt; user (not capitalised)</p>
-<p>If your answer is ‘yes’ to all of the above questions, then congratulations. Now please go teach your friends. :)</p>
-<p>If not, then let’s use this challenge as an excuse to play around with and learn about the intricacies of scope.</p>
-<p>As a reference, find a copy of the “Programming Ruby - The Pragmatic Programmer’s Guide” aka “Pickaxe” and read the section “Variables and Constants” in chapter 22. Watch <a href="https://www.youtube.com/watch?v=iLxKNUFHAnY">this video</a> as well!</p>
-<hr class="thick">
+<div><p>A central component of good object-oriented design is understanding how much of an object to <em>expose</em>.</p>
+<p><em>Exposing</em> an object means making its properties (internal data) available to the “public”, i.e. other objects in the program or even other programs. Together, these public methods make up an object’s <strong>public interface</strong> . The methods which are private (accessible only within the object itself) make up its <strong>private interface</strong> .</p>
+<p>As a general rule, you should only expose as much of an object as is needed for other objects to interact with it. Design objects that can take care of their own properties. They shouldn’t just invite everyone else in to mess around with their business.</p>
+<p>To play with this principle, let’s build a simple <code class="inline">BankAccount</code> class that stores information about a bank account.</p>
 <h3>Objectives</h3>
-<h4>Local variables and methods</h4>
-<p>Write a program that has one local variable <code class="inline">local_var</code> defined in the global scope and one method <code class="inline">get_local_var</code> defined in the global scope.</p>
-<p>The method should return the value of the local variable. Does it work? What happens if you define a local variable of the same name within the body of the method definition and assign it a different value?  </p>
-<h4>Classes and instance variables</h4>
-<p>Add a class <code class="inline">BasicClass</code> to your program. Duplicate your <code class="inline">get_local_var</code> method within the class.</p>
-<p>Create a new instance of <code class="inline">BasicClass</code> and call the <code class="inline">get_local_var</code> method on it. What happens?</p>
-<p>Now add an instance variable <code class="inline">@instance_var</code> to your class and define an instance method <code class="inline">get_instance_var</code> for your class that returns the value of <code class="inline">@instance_var</code>.</p>
-<p>Try creating a new instance of the class and calling <code class="inline">get_instance_var</code> on it. What happens?  </p>
-<h4>Getters and setters</h4>
-<p>Your instance method <code class="inline">get_instance_var</code> is an example of a <em>getter method</em>. It allows us <em>read access</em> to an instance variable of an object.</p>
-<p>A <em>setter method</em> is similar, except that instead of reading an instance variable, it allows us to <em>write</em> a new value to the instance variable.</p>
-<p>Create a setter method for <code class="inline">BasicClass</code> named <code class="inline">set_instance_var=</code> that takes one argument and then assigns the value of the argument to the instance variable <code class="inline">@instance_var</code>.</p>
-<p>Note that a commonly used pattern for setter methods is to name them with a <code class="inline">=</code> at the end. This is simply syntactic sugar that allows us to write code like this:</p>
-<pre><code class="ruby hljs">    foo = BasicClass.new
-foo.get_instance_var
-<span class="hljs-comment"># =&gt; 'default value'</span>
-foo.set_instance_var = <span class="hljs-string">'some other value'</span></code></pre>
-<p>The last line is the same as writing <code class="inline">foo.set_instance_var=('some other value')</code>, it’s just easier to read. Thank you, Ruby.  </p>
-<h4>Class methods</h4>
-<p>A <em>class method</em> is a method on a class, as opposed to a method on an instance of a class. It works like this:</p>
-<pre><code class="ruby hljs">    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCoolClass</span></span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">self</span>.<span class="hljs-title">some_method</span></span>
-<span class="hljs-string">"quack"</span>
-<span class="hljs-keyword">end</span>
-<span class="hljs-keyword">end</span>
-
-MyCoolClass.some_method <span class="hljs-comment"># =&gt; "quack"</span></code></pre>
-<p>What are some class methods you’ve seen? <code class="inline">MyCoolClass.new</code> is one class method that every class in Ruby comes with, which returns a new instance of a class.  </p>
-<h4>Class variables</h4>
-<p>An <em>instance variable</em>, as the name implies, is associated with an <em>instance</em> of a class. In other words, its value can be different for different objects created by the same class.</p>
-<p>Try creating two different objects from <code class="inline">BasicClass</code> and then using your setter method to give each of them a different value for the <code class="inline">@instance_var</code>. Then use your getter method on each to see if they are <em>actually</em> different.</p>
-<p>A <em>class variable</em>, on the other hand, is the same for all instances of a class.</p>
-<p>Within your class definition, create the class variable <code class="inline">@@class_var</code> and assign it a value.</p>
-<p>Then define a getter and setter method for <code class="inline">@@class_var</code> and play around with assigning new values to it from multiple instances of the class.</p>
-<p>What happens if you change the value of <code class="inline">@@class_var</code> from one instance, and then create a new instance of the class and use your getter method to read the value of <code class="inline">@@class_var</code>?</p>
-<h4>Global variables and constants</h4>
-<p>Within your global scope, create a constant <code class="inline">THIS_IS_A_CONSTANT</code> and a global variable <code class="inline">$global_var</code>.</p>
-<p>Then write getter and setter methods for your constant and global variable and duplicate them within your class and in the global scope. (I know, this is not DRY, but we’re just experimenting here).</p>
-<p>What happens when you try to read from and write to constants and global variables from different place in your program? Did you get any errors? Did you <strong>Google</strong> the errors? ;)</p>
-</div>
+<h4>Def initialize</h4>
+<p>Define the class <code class="inline">BankAccount</code>.</p>
+<p>It should have three instance variables: <code class="inline">@customer_name</code>, <code class="inline">@type</code>, and <code class="inline">@acct_number</code>.</p>
+<p>Define an <code class="inline">initialize</code> method that takes three arguments and assigns them to the above instance variables. It should look something like this:</p>
+<pre><code class="ruby hljs">    my_acct = BankAccount.new(<span class="hljs-string">"Junipero Serra"</span>, <span class="hljs-string">"Checking"</span>, <span class="hljs-string">"347-923-239"</span>)</code></pre>
+<h4>Redefine to_s</h4>
+<p>One more requirement: define an instance method <code class="inline">to_s</code> that will return a string with information about the account.</p>
+<p>You will probably come across other classes in Ruby that redefine the built-in method <code class="inline">to_s</code>. This is an easy way to display relevant information about an object to the user, and to control which information is conveyed.</p>
+<p>As an example, here is one way to display object information:</p>
+<pre><code class="ruby hljs">    my_acct.to_s
+<span class="hljs-comment"># =&gt; "Junipero Serra: Checking# ***** 3239"</span></code></pre>
+<p>Once you define <code class="inline">to_s</code>, you can interpolate your objects in strings like this:</p>
+<pre><code class="ruby hljs">    str = <span class="hljs-string">"My account information is <span class="hljs-subst">#{my_acct}</span>"</span>
+<span class="hljs-comment"># =&gt; "My account information is Junipero Serra: Checking# ***** 3239"</span></code></pre>
+<h4>Define getter methods</h4>
+<p>When you create a new instance of <code class="inline">BankAccount</code>, do you have access to any of the values stored in its instance variables? No? Good.</p>
+  <p>The way we get read access to variables stored within a class is through a pattern called a <em>getter method</em>.</p>
+  <p>Which of the instance variables should have associated <em>getter</em> methods?</p>
+  <p>Think about the implications behind defining a getter method. Which variables should expose themselves in this way? Which values should be hidden and protected from the outside world?  </p>
+  <h4>Define setter methods</h4>
+  <p>Now think about which variables should be able to be <em>written</em> to.</p>
+  <p>Then define your setter method(s).  </p>
+  <h4>Hide the account</h4>
+  <p>You probably recognized that it might not be a good idea to expose the account number via a getter or setter method. That is just the kind of information that should remain private.</p>
+  <p>Sometimes, though, it is useful to expose part of a value. If a user has many checking accounts, then it might be useful to display some kind of information that allows them to distinguish between the accounts without seeing the full account number.</p>
+  <p>How would you get around this problem? What kind of method can you define that will return enough information about the account to be able to distinguish it from other accounts, without exposing the full number?</p>
+  </div>

@@ -1,50 +1,37 @@
 require 'rspec'
-require_relative 'scope'
+require_relative 'bank'
 
-describe "BasicClass" do
-  let(:object) { BasicClass.new("var") }
+describe "BankAccount" do
 
-  describe "#initialize" do
-    it "should take 1 argument and set @instance_var" do
-      expect{ BasicClass.new }.to raise_error ArgumentError
-      expect( object.instance_variable_get(:@instance_var) ).to eq "var"
+  it "should be initialized with 3 arguments" do
+    expect{BankAccount.new}.to raise_error ArgumentError
+    expect{BankAccount.new("Junipero Serra", "Checking", "347-923-239")}.not_to raise_error
+  end
+
+  it "should have getter methods for customer_name and type" do
+    my_acct = BankAccount.new("Junipero Serra", "Checking", "347-923-239")
+    expect(my_acct.customer_name).to be_a String
+    expect(my_acct.type).to be_a String
+  end
+
+  describe "#to_s" do
+    it "should return string containing customer_name and type" do
+      my_acct = BankAccount.new("Junipero Serra", "Checking", "347-923-239")
+      expect(my_acct.to_s).to match my_acct.customer_name
+      expect(my_acct.to_s).to match my_acct.type
+    end
+
+    it "should return string containing hidden account_number" do
+      my_acct = BankAccount.new("Junipero Serra", "Checking", "347-923-239")
+      expect(my_acct.to_s).to match(/239/)
+      expect(my_acct.to_s).not_to match(/327/)
+      expect(my_acct.to_s).not_to match(/923/)
     end
   end
 
-  it "should have instance method #get_local_var" do
-    expect{ object.get_local_var }.not_to raise_error
-    expect( object.get_local_var ).not_to eq nil
-  end
-
-  describe "(getter/setter method)" do
-    it "#get_instance_var should return @instance_var" do
-      expect(object.get_instance_var).to eq object.instance_variable_get(:@instance_var)
-    end
-
-    it "#set_instance_var= should take 1 argument and set @instance_var" do
-      expect(object.set_instance_var=('another value')).to eq "another value"
-    end
-  end
-
-  it "should have class variable @@class_var" do
-    expect(BasicClass.class_variable_get(:@@class_var)).not_to eq nil
-  end
-
-  describe "(getter/setter method)" do
-    it "#get_class_var should return @@class_var" do
-      expect(object.get_class_var).to eq BasicClass.class_variable_get(:@@class_var)
-    end
-
-    it "#set_class_var= should take 1 argument and set @@class_var" do
-      expect(object.set_class_var=('another value')).to eq "another value"
-    end
-  end
-
-  it "should have \"global_var\"" do
-    expect($global_var).not_to eq nil
-  end
-
-  it "should have constant THIS_IS_A_CONSTANT" do
-    expect(BasicClass::THIS_IS_A_CONSTANT).not_to eq nil
+  it "should have private method #acct_number" do
+    my_acct = BankAccount.new("Junipero Serra", "Checking", "347-923-239")
+    expect{my_acct.acct_number}.to raise_error NoMethodError
+    expect(my_acct.send(:acct_number)).to eq "347-923-239"
   end
 end
