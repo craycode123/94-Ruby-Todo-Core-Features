@@ -1,30 +1,13 @@
 require 'rspec'
-require_relative 'detecting_anagrams'
+require_relative 'generating_anagrams'
+describe "generating_anagrams.rb" do
+  describe "#anagrams_for" do
+    let(:word) { 'Cesar' }
+    let(:dictionary) { ['acres', 'cares', 'Cesar', 'races', 'smelt', 'melts', 'etlsm'] }
+    let(:anagrams) { ['acres', 'cares', 'Cesar', 'races'] }
 
-describe "detecting_anagrams.rb" do
-  describe "is_anagram?" do
-    context "when both words are anagrams" do
-      let(:word_one) { "test" }
-      let(:word_two) { "tset" }
-
-      it "should return true" do
-        expect(is_anagram?(word_one, word_two)).to eq true
-      end
-
-      context "regardless of uppercase/lowercase" do
-        it "should return true" do
-          expect(is_anagram?(word_one, word_two.upcase)).to eq true
-        end
-      end
-    end
-
-    context "both words are not anagrams" do
-      let(:word_one) { "test" }
-      let(:word_two) { "invalid" }
-
-      it "should return false" do
-        expect(is_anagram?(word_one, word_two)).to eq false
-      end
+    it "returns an array of anagrams for the word based on the dictionary array" do
+      expect(anagrams_for(word, dictionary)).to eq anagrams
     end
   end
 end

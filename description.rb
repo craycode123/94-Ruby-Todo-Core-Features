@@ -1,61 +1,54 @@
-<div id="challenge-instructions"><h3>Anagrams 1: Detecting Anagrams</h3><div><p>An <strong>anagram</strong> is a word formed by rearranging the letters of another word, e.g., <em>iceman</em> is an anagram of <em>cinema</em>.</p>
-<p>Since this relationship is symmetric - X is an anagram of Y if and only if Y is an anagram of X - you’ll often hear people say that, e.g., “iceman and cinema are anagrams” or “iceman and cinema are anagrams of each other.” They all mean the same thing: you can rearrange the letters of one word to spell another.</p>
-<p>We’re going to write a method <code class="inline">is_anagram?</code> that takes two strings as input and returns <code class="inline">true</code> if the two strings are anagrams and <code class="inline">false</code> otherwise.</p>
-<p>For now we won’t care if the strings are valid English words or not.</p>
+<div id="challenge-instructions"><h3>Anagrams 2: Generating Anagrams</h3><div><p>An <strong>anagram</strong> is a word formed by rearranging the letters of another word, e.g., <em>iceman</em> is an anagram of <em>cinema</em>.</p>
+<p>We’re going to write a method called <code class="inline">anagrams_for</code> that takes as its input a word and an array of words, representing a dictionary, and returns an array consisting of all the anagrams of the input word.</p>
+<p>You should look back and possibly re-use some of the code you wrote in your <code class="inline">is_anagram?</code> method. You may or may not re-use the method itself, but at the very least you’ll want the code handy for reference.&nbsp;</p>
 <h3>Tasks</h3>
-<h4>1. Pseudocode Implementation of <code class="inline">is_anagram?</code></h4>
-<p>Before you start writing a single line of Ruby code, sit down and ask yourself, “Do I know how to tell whether two words are anagrams?”</p>
-<p>Your <code class="inline">is_anagram?</code> method will be a (digital, computerized, mechanical) model of the (analog, organic, human) process by which you determine whether two words are anagrams.</p>
-<p>Once you’re confident that <em>you</em> can tell whether two words are anagrams, reflect on your own or with your pair about how that process works. Can you explain it to your pair in a way that they understand? How do you know whether they’ve understood you?</p>
-  <p>If you can’t explain it to another person, you’ll have a hard time “explaining” it to a computer via Ruby code!</p>
-  <p>Finally, write pseudocode that outlines your own mental procedure in a way that’s easy for a human to both understand and translate into their favorite programming language.</p>
-  <p><strong>Note:</strong> If you have spent more than 20 minutes trying to figure out how to do this, check in with a fellow student or staff. There’s a very simple way to implement this!</p>
-    <h4>2. Ruby Implementation of <code class="inline">is_anagram?</code></h4>
-    <p>Write a method <code class="inline">is_anagram?</code> in Ruby that takes two strings as input and returns <code class="inline">true</code> if the two strings are anagrams and <code class="inline">false</code> otherwise. The method should be <em>case insensitive</em>. For example,</p>
-    <pre><code class="ruby hljs"><span class="hljs-comment"># The method should be symmetric, i.e.,</span>
-    <span class="hljs-comment"># is_anagram?(word1, word2) == is_anagram?(word2, word1) for any two words</span>
-    puts is_anagram?(<span class="hljs-string">'cinema'</span>, <span class="hljs-string">'iceman'</span>) <span class="hljs-comment"># =&gt; true</span>
-    puts is_anagram?(<span class="hljs-string">'iceman'</span>, <span class="hljs-string">'cinema'</span>) <span class="hljs-comment"># =&gt; true</span>
+<h4>1. Pseudocode Implementation of <code class="inline">anagrams_for</code></h4>
+<p>Before you start writing a single line of Ruby code, sit down and ask yourself, “Given a word and a dictionary, could I create a list of anagrams of that word by hand, tediousness aside?”</p>
+<p>Your <code class="inline">anagrams_for</code> method will be a model of you performing this task, so the more clearly you understand how to do this task yourself the easier it will be for you to write the code. Do you understand it well enough to teach someone else how to create an anagram list? How do you know the other person understands how to create an anagram list?</p>
+    <p>Write pseudocode that outlines your own mental procedure in a way that’s easy for a human to both understand and translate into their favorite programming language.</p>
+    <h4>2. Ruby Implementation of <code class="inline">anagrams_for</code></h4>
+    <p>Write a method called <code class="inline">anagrams_for</code> that takes as its input a word and an array of words, representing a dictionary, and returns an array consisting of all the anagrams of the input word. Like <code class="inline">is_anagram?</code>, the method should be <em>case insensitive</em>. Remember, a word is always an anagram of itself.</p>
+    <p><code class="inline">anagrams_for</code> should return an empty arrray (<code class="inline">[]</code>) if no anagrams are found in the dictionary. You don’t have to worry about the order of the returned <code class="inline">Array</code>.</p>
+    <p>For example,</p>
+    <pre><code class="ruby hljs"><span class="hljs-comment"># The dictionary is just an arbitrary collection of strings.</span>
+    <span class="hljs-comment"># It need not contain English words, e.g., 'etlsm'.</span>
+    dictionary = [<span class="hljs-string">'acres'</span>, <span class="hljs-string">'cares'</span>, <span class="hljs-string">'Cesar'</span>, <span class="hljs-string">'races'</span>, <span class="hljs-string">'smelt'</span>, <span class="hljs-string">'melts'</span>, <span class="hljs-string">'etlsm'</span>]
 
-    <span class="hljs-comment"># Pedantically, a word is always an anagram of itself.</span>
-    <span class="hljs-comment"># This is called being "reflexive," i.e., is_anagram?(word, word) == true for any word</span>
-    puts is_anagram?(<span class="hljs-string">'pants'</span>, <span class="hljs-string">'pants'</span>) <span class="hljs-comment"># =&gt; true</span>
+    <span class="hljs-comment"># If the input word happens to be in the dictionary, it should be in the the returned array, too.</span>
+    <span class="hljs-comment"># The list should also be case-insensitive.</span>
+    puts anagrams_for(<span class="hljs-string">'acres'</span>, dictionary) <span class="hljs-comment"># =&gt; ['acres', 'cares', 'Cesar', 'races']</span>
+    puts anagrams_for(<span class="hljs-string">'ACRES'</span>, dictionary) <span class="hljs-comment"># =&gt; ['acres', 'cares', 'Cesar', 'races']</span>
+    puts anagrams_for(<span class="hljs-string">'Cesar'</span>, dictionary) <span class="hljs-comment"># =&gt; ['acres', 'cares', 'Cesar', 'races']</span>
 
-    <span class="hljs-comment"># is_anagram? should be case-insensitive</span>
-    puts is_anagram?(<span class="hljs-string">'CiNemA'</span>, <span class="hljs-string">'iceman'</span>) <span class="hljs-comment"># =&gt; true</span>
+    <span class="hljs-comment"># Although "sacre" is not *in* the dictionary, several words in the dictionary are anagrams of "sacre"</span>
+    puts anagrams_for(<span class="hljs-string">'sacre'</span>, dictionary) <span class="hljs-comment"># =&gt; ['acres', 'cares', 'Cesar', 'races']</span>
 
-    <span class="hljs-comment"># Notice: acres, cares, and scare are all anagrams of each other</span>
-    puts is_anagram?(<span class="hljs-string">'acres'</span>, <span class="hljs-string">'cares'</span>) <span class="hljs-comment"># =&gt; true</span>
-    puts is_anagram?(<span class="hljs-string">'cares'</span>, <span class="hljs-string">'scare'</span>) <span class="hljs-comment"># =&gt; true</span>
-    puts is_anagram?(<span class="hljs-string">'scare'</span>, <span class="hljs-string">'acres'</span>) <span class="hljs-comment"># =&gt; true</span>
+    <span class="hljs-comment"># Neither the input word nor the words in the dictionary need to be valid English words</span>
+    puts anagrams_for(<span class="hljs-string">'etlsm'</span>, dictionary) <span class="hljs-comment"># =&gt; ['smelt', 'melts', 'etlsm']</span>
 
-    <span class="hljs-comment"># The "words" don't need to be valid English words</span>
-    puts is_anagram?(<span class="hljs-string">'abcde2'</span>, <span class="hljs-string">'c2abed'</span>) <span class="hljs-comment"># =&gt; true</span>
-
-    puts is_anagram?(<span class="hljs-string">'pants'</span>, <span class="hljs-string">'turtle'</span>) <span class="hljs-comment"># =&gt; false</span>
-    puts is_anagram?(<span class="hljs-string">'123123'</span>, <span class="hljs-string">'kjhasd'</span>) <span class="hljs-comment"># =&gt; false</span></code></pre>
+    puts anagrams_for(<span class="hljs-string">'unicorn'</span>, dictionary) <span class="hljs-comment"># =&gt; []</span></code></pre>
     <h3>As you’re coding, ask yourself…</h3>
     <ul>
     <li>Do I have a clear understanding of how this procedure works?
     </li>
     <li>Am I stuck because I know what I want to do but don’t know how to say it in Ruby?
       </li>
-      <li>Am I stuck because my understanding of how anagrams work is to fuzzy or mistaken?&nbsp;
+      <li>Is my pseudo-code helpful enough to help me get started?
+      </li>
+      <li>Am I stuck because my understanding of how anagrams work is too fuzzy or mistaken?
       </li>
       </ul>
+      <p>Have a chat with your mentor about the problems you are encountering in terms of learning style, and seek advice on how you can make your learning more efficient.</p>
       <h3>After you’re done, ask yourself…</h3>
-      <p>Is there a way to transform a word into a “canonical” representation such that two words have the same canonical representation precisely when they are anagrams of each other?</p>
-      <p>That is, can you define a method <code class="inline">canonical</code> which lets us write <code class="inline">is_anagram?</code> like this?</p>
-      <pre><code class="ruby hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">canonical</span><span class="hljs-params">(word)</span></span>
-      <span class="hljs-comment"># Magic goes here</span>
-      <span class="hljs-keyword">end</span>
-
-      <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_anagram?</span><span class="hljs-params">(word1, word2)</span></span>
-      canonical(word1) == canonical(word2)
-      <span class="hljs-keyword">end</span></code></pre>
-      <p>Please include in your answer: Why is adding the canonical method a good idea? What principles in programming does it follow?</p>
-      <p>###
-      External Resources</p>
+      <ul>
+      <li>Is my program doing any duplicate work? Is there a way to remove that duplicate work?
+      </li>
+      <li>Am I iterating over the dictionary multiple times or just once?
+      </li>
+      <li>If I’m re-using <code class="inline">is_anagram?</code>, what happens if I call <code class="inline">is_anagram?(word1, word2)</code> and then later call <code class="inline">is_anagram?(word1, word100)</code>? Is there any duplicate work?
+      </li>
+      </ul>
+      <h3>External Resources</h3>
       <ul>
       <li><a href="http://en.wikipedia.org/wiki/Anagram">Anagram on Wikipedia</a>
       </li>
