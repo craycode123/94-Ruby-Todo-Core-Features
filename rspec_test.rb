@@ -1,37 +1,19 @@
 require 'rspec'
-require_relative 'boggle_2'
-describe "BoggleBoard (4x4)" do
-  let(:board) { BoggleBoard.new }
-  before(:each) { board.shake! }
+require_relative 'sudoku'
+describe "Sudoku" do
+  let(:board_string) { "609238745200561398853947621486352179792614583531879264945723816328196457167485932" }
+  let(:new_sudoku_object) { Sudoku.new(board_string) }
+  let(:solution) { "619238745274561398853947621486352179792614583531879264945723816328196457167485932" }
 
-  describe "#include?" do
-    it "should return true if board contains word" do
-      shaken_board = board.instance_variable_get(:@board)
-      word = shaken_board[rand(0..3)].join
-      expect(board.include?(word)).to eq true
-    end
-
-    it "should return false if board does not contain word" do
-      word = "RIDICULOUS"
-      expect(board.include?(word)).to eq false
+  describe "initializing a new Sudoku object" do
+    it "should only take in a string argument" do
+      expect(new_sudoku_object).to be_a(Sudoku)
     end
   end
-end
 
-describe "BoggleBoard (16x1)" do
-  let(:board) { BoggleBoard.new }
-  before(:each) { board.shake! }
-
-  describe "#include?" do
-    it "should return true if board contains word" do
-      shaken_board = board.instance_variable_get(:@board)
-      word = shaken_board[0..3].join
-      expect(board.include?(word)).to eq true
-    end
-
-    it "should return false if board does not contain word" do
-      word = "RIDICULOUS"
-      expect(board.include?(word)).to eq false
+  describe "#solve!" do
+    it "should return a string with logically necessary cells filled in" do
+      expect(new_sudoku_object.solve!).to eq(solution)
     end
   end
 end
