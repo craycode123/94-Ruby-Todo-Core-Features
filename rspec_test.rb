@@ -1,45 +1,26 @@
 require 'rspec'
-require_relative 'cookies'
+require_relative 'house'
 
-describe "Cookie" do
+describe "House" do
+  let(:house) { House.new(square_feet: 2000) }
   describe "#initialize" do
-    it "takes 2 arguments: type and baking_time" do
-      expect{ Cookie.new }.to raise_error ArgumentError
-      expect{ Cookie.new("Chocolate Chip") }.to raise_error ArgumentError
-      expect{ Cookie.new(10) }.to raise_error ArgumentError
-      expect{ Cookie.new("Chocolate Chip", 10) }.not_to raise_error
+
+    it "should take a named argument" do
+      expect{ House.new }.not_to raise_error
+      expect{ House.new(address: "Glomac Damansara") }.not_to raise_error
+      expect{ House.new("Glomac Damansara", 2000) }.to raise_error ArgumentError
     end
 
-    it "has attribute :type and :status" do
-      expect( Cookie.new("Chocolate Chip", 10) ).to respond_to :type
-      expect( Cookie.new("Chocolate Chip", 10) ).to respond_to :status
-    end
-
-    it "returns Cookie object" do
-      expect(Cookie.new("Chocolate Chip", 10)).to be_a Cookie
-    end
-  end
-end
-
-describe "Oven" do
-  describe "#initialize" do
-    it "returns Oven object" do
-      expect(Oven.new).to be_an Oven
-    end
-  end
-
-  describe "#bake" do
-    it "takes 2 arguments: cookie and timer" do
-      oven = Oven.new
-      cookie = Cookie.new("Chocolate Chip", 10)
-      expect{ oven.bake }.to raise_error ArgumentError
-      expect{ oven.bake(cookie, 10) }.not_to raise_error
-    end
-
-    it "changes status of cookie to burnt if time_to_bake > cookie.baking_time" do
-      oven = Oven.new
-      cookie = Cookie.new("Chocolate Chip", 10)
-      expect{ oven.bake(cookie, 12) }.to change{ cookie.status }.from(:doughy).to(:burnt)
+    it "should declare default values for @sold" do
+      house = House.new(address: "Glomac Damansara",
+                        square_feet: 2000,
+                        num_bedrooms: 3,
+                        num_baths: 2,
+                        cost: 500000,
+                        down_payment: 0.2,
+                        has_tenants: true
+                        )
+      expect(house.sold).not_to be_nil
     end
   end
 end
