@@ -1,27 +1,27 @@
 require 'rspec'
-require_relative 'factorial'
-describe "factorial.rb" do
-  describe "#factorial_iterative(8)" do
-    it "should return 40320" do
-      expect(factorial_iterative(8)).to eq 40320
+require_relative 'fibonacci'
+describe "fibonacci.rb" do
+  describe "fibonacci_iterative(7)" do
+    it "should return 13" do
+      expect(fibonacci_iterative(7)).to eq 13
     end
 
-    it "should not call itself within itself" do
-      expect(self).to receive(:factorial_iterative).once.and_call_original
-      factorial_iterative(8)
+    it "should not call itself" do
+      expect(self).to receive(:fibonacci_iterative).once.and_call_original
+      fibonacci_iterative(7)
     end
   end
 
-  describe "#factorial_recursive(6)" do
-    it "should return 720" do
-      expect(factorial_recursive(6)).to eq 720
+  describe "fibonacci_recursive(6)" do
+    it "should return 8" do
+      expect(fibonacci_recursive(6)).to eq 8
     end
 
-    it "should call itself within itself" do
-      expect(self).to receive(:factorial_recursive).with(6).and_call_original
-      # provide 120 return after intercepting call
-      expect(self).to receive(:factorial_recursive).with(5) { 120 }
-      factorial_recursive(6)
+    it "should call itself" do
+      expect(self).to receive(:fibonacci_recursive).with(6).and_call_original
+      expect(self).to receive(:fibonacci_recursive).with(5) { 5 }
+      expect(self).to receive(:fibonacci_recursive).with(4) { 3 }
+      fibonacci_recursive(6)
     end
   end
 end
