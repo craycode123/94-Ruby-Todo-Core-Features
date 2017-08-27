@@ -1,0 +1,21 @@
+We will be dealing with some simple string manipulation in this challenge. 
+
+Say you are giving a word where all its letters are downcase. Choose a letter from that word and capitalize it, then return the word with the capitalized letter. 
+
+For example, if you are given the word “edition” and the chosen letter is “d”, the returned word should be “eDition”. 
+
+If the chosen letter is “i”, we will capitalize the first time the letter appears, 
+
+The returned word should be “edItion”. 
+
+In manipulate.rb, write a method called manipulate that takes in two arguments: string and letter. The argument letter should be a letter of the given string. Then write code to manipulate the string as described above. 
+
+For example 
+p manipulate("hello", "e") 
+
+The output is 
+"hEllo" 
+
+Use methods such as index, [], upcase or capitalize for this challenge. DO NOT use gsub or slice here. 
+
+We would like you to get used to the index and [] methods first. There will be other challenges later on where you can use gsub and slice :)
