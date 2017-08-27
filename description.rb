@@ -1,35 +1,9 @@
-<div><p>In this challenge, you will be sorting an array of words typed into the command line. It should work something like this:</p>
-<pre><code class="bash hljs ruby">$ ruby dictionary_sort.rb
-&gt; Type a <span class="hljs-symbol">word:</span>
-&gt; hyperbole
-&gt; Type another word (<span class="hljs-keyword">or</span> press enter to finish):
-  &gt; fantasmagoria
-&gt; Type another word (<span class="hljs-keyword">or</span> press enter to finish):
-  &gt; xanthate
-&gt; Type another word (<span class="hljs-keyword">or</span> press enter to finish):
-  &gt; polysaccharide
-&gt; Type another word (<span class="hljs-keyword">or</span> press enter to finish):
-  &gt;
-&gt; Congratulations! Your dictionary has <span class="hljs-number">4</span> <span class="hljs-symbol">words:</span>
-&gt; fantasmagoria
-&gt; hyperbole
-&gt; polysaccharide
-&gt; xanthate</code></pre>
-<p>Make sure to test your program thoroughly, both internally and from the user interface.</p>
-<p><cite>Source: Chris Pine,&nbsp;<a href="http://pine.fm/LearnToProgram/">Learn To Program</a></cite></p>
-<h3>Tasks</h3>
-<h4>1. Store user input</h4>
-<p>Write a program that asks the user to type as many words as they want (one word per line, continuing until they press <code class="inline">Enter</code> on an empty line).</p>
-<p>It should store those words in an array.</p>
-<h4>2. Sort and print</h4>
-<p>When the user presses <code class="inline">Enter</code> on an empty line, it should repeat the entered words back (print them to the console) in alphabetical order.</p>
-<p>It should ignore case for sorting, e.g.&nbsp;<code class="inline">apple</code> should come before <code class="inline">Bear</code>, and it should still print out the words in their original case.</p>
-<h3>Debugging: Printing to Log</h3>
-<p><code class="inline">puts</code> or <code class="inline">p</code> is the <code class="inline">Ruby</code> method commonly used by developers to print something to log. When confronted with total confusion about how parts of the code are interacting with each other, a developer will place these statements everywhere to see what methods are called and what’s happening inside each method.</p>
-<p>This isn’t cheating, this isn’t giving up, this isn’t something beginners do. In the Real World, nobody cares if you debug a problem using <code class="inline">puts</code> or <code class="inline">p</code>, they only care that you debugged the problem.</p>
-  <h4>As you’re coding, ask yourself …</h4>
-  <p><em>What happens if the user inputs a number or an empty string?</em></p>
-  <p>####
-  External Resources</p>
-  <p><em>Learn about various <a href="http://en.wikipedia.org/wiki/Sorting_algorithm">sorting algorithm</a>&nbsp;</em></p>
-  </div>
+<div><p>Sometimes, you want to add a bit of chaos to your data. Too many ordered lists can get… boring.</p>
+<p>Writing your own <code class="inline">shuffle</code> method is a good way to explore looping through collections.</p>
+<p>And no, you are <strong>not</strong> allowed to use <code class="inline">Array#shuffle</code> method or <code class="inline">Array#sort_by</code>. The point of this challenge is to get you to delve into the algorithm, not use a pre-built solution. That would be a cop-out.</p>
+<h3>Task</h3>
+<h4>Write a Method to Shuffle an Array</h4>
+<p>Write a <code class="inline">shuffle</code> method that takes an array and returns a new array with all of the elements in a random order. One important property of a good <code class="inline">shuffle</code> method is that every permutation is equally likely.</p>
+<p>As usual, start by writing a pseudo-code on how you would approach this. You will need to use loops, arrays,&nbsp;<code class="inline">rand</code> or <code class="inline">Array#sample</code>, and also know how to access elements in an array. The&nbsp;<a href="https://en.wikipedia.org/wiki/Fisher-Yates_shuffle">Knuth shuffle method</a>&nbsp;may be helpful for you to get started. Remember that you can always use the <strong>irb</strong> to help you try out what&nbsp;<code class="inline">rand</code>or <code class="inline">Array#sample</code>&nbsp;does. You may also find <a href="https://github.com/thoughtbot/til/blob/master/ruby/parallel-assignment.md">parallel assignments</a> useful here.</p>
+<p>Use the driver code in the gist to check and be sure that the method truly does shuffle the elements in the array each time it is called.</p>
+</div>
