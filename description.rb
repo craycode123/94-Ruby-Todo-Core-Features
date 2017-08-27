@@ -1,108 +1,72 @@
-<div><p>Since we love coding, we can’t wait to tell the whole world how much we love coding. So we decided to write a programme that prints “I love coding!” <strong>5 times</strong>. Perhaps we could do it this way:</p>
-  <pre><code class="hljs ruby">puts <span class="hljs-string">"I love coding!"</span>
-  puts <span class="hljs-string">"I love coding!"</span>
-  puts <span class="hljs-string">"I love coding!"</span>
-  puts <span class="hljs-string">"I love coding!"</span>
-  puts <span class="hljs-string">"I love coding!"</span></code></pre>
-  <p>The code above is cumbersome and, as you may have noticed, repetitive. It’s just copy-and-pasting, but it’s bad code! </p>
-  <p>The way we can improve the code is by using <strong>loops</strong> so that we can repeat code without repeating ourselves. This is a Ruby concept called <strong>DRY - DO NOT REPEAT YOURSELF</strong>. </p>
-  <p>There are various types of loops in Ruby, <code class="inline">for</code>, <code class="inline">while</code>, <code class="inline">until</code>. In this challenge, we will discuss the <code class="inline">while</code> and <code class="inline">until</code> loop. </p>
-  <hr class="thin">
-  <h4>Example 1: using <code class="inline">while</code></h4>
-  <p>We can refactor the code above as follows:</p>
-  <pre><code class="hljs ruby">count = <span class="hljs-number">0</span>
-
-  <span class="hljs-keyword">while</span> count &lt; <span class="hljs-number">5</span>
-  puts <span class="hljs-string">"I love coding!"</span>
-  count += <span class="hljs-number">1</span>
-  <span class="hljs-keyword">end</span></code></pre>
-  <p>Let’s translate this code to plain english.</p>
-  <blockquote><p>While the count is less than 5, puts “I love coding!”</p>
-  </blockquote>
-  <p>Let’s dissect the code</p>
-  <blockquote><p>We assign 0 to the variable <code class="inline">count</code> because we haven’t start counting yet
-  We start a <code class="inline">while</code> loop which will run the <strong>code block</strong> between <code class="inline">while</code> and <code class="inline">end</code> until the given condition is <strong>false</strong>.
-    So long the count is NOT 5, it will puts <code class="inline">I love coding!</code>
-  After every <code class="inline">I love coding!</code>, it will add the count by 1. The <code class="inline">+=</code> is called an <strong>assignment operator</strong>, which is equivalent to <code class="inline">count = count + 1</code>.</p>
-  </blockquote>
-  <p>A condition to stop the loop is essential for any <code class="inline">while</code> loop, otherwise we will get stuck in an infinite loop where the programme will keep running and take up unnecessary computer resources. Generally, when we write a <code class="inline">while</code> loop, it will look something as follows:</p>
-  <pre><code class="hljs ruby"><span class="hljs-keyword">while</span> &lt;write-your-condition-statement-here&gt;
-  <span class="hljs-comment"># do something repetitive</span>
-  <span class="hljs-keyword">end</span></code></pre>
-  <p>The <code class="inline">while</code> loop will continue if the conditional statement evaluates to true.</p>
-  <p>Here is another example, run the code in <code class="inline">example1.rb</code> to see how it works.</p>
-  <hr class="thin">
-  <h4>Example 2: assignment operator</h4>
-  <p>Let’s now look at another example. We would like to use a <code class="inline">while</code> loop to get the following output;</p>
-  <pre><code class="hljs ruby">puts <span class="hljs-string">"This is the number 1"</span>
-  puts <span class="hljs-string">"This is the number 2"</span>
-  puts <span class="hljs-string">"This is the number 3"</span>
-  puts <span class="hljs-string">"This is the number 4"</span>
-  puts <span class="hljs-string">"This is the number 5"</span></code></pre>
-  <p>We can refactor the code above as follows (the code can also be found in <code class="inline">example2.rb</code>):</p>
-  <pre><code class="hljs ruby">i = <span class="hljs-number">1</span> <span class="hljs-comment"># a base case </span>
-
-  <span class="hljs-keyword">while</span> i &lt; <span class="hljs-number">6</span>
-  puts <span class="hljs-string">"This is the number <span class="hljs-subst">#{i}</span>"</span>
-  i += <span class="hljs-number">1</span>
-  <span class="hljs-keyword">end</span></code></pre>
-  <p>Let’s dissect this code:</p>
-  <blockquote><p>In line 1, we assigned the value 1 to an integer <code class="inline">i</code>. We can think of this as a base case.
-    Now, start a <code class="inline">while</code> loop that will keep running the code block given as long as <code class="inline">i &lt; 6</code>.
-    In the code block, we will first display the sentence <code class="inline">"This is the number #{i}"</code>, and then increment <code class="inline">i</code> by 1.
-    When <code class="inline">i = 6</code>, the <code class="inline">while</code> loop will be terminated since <code class="inline">i</code> is no longer less than 6. </p>
-  </blockquote>
-  <p>If you comment out the line <code class="inline">i += 1</code> and run the code, you will notice that your programme will keep running. </p>
-  <p>Why? Because <code class="inline">i</code> does not increase by one each time the loop happens and thus it will not ever reach <code class="inline">6</code>!</p>
-  <p>To stop a programme from running, press <strong>Ctrl-C</strong> in your terminal. </p>
-  <hr class="thin">
-  <h4>Example 3: until loops</h4>
-  <p>Besides the <code class="inline">while</code> loop, Ruby also has a similar loop called <code class="inline">until</code> that essentially does the same thing as a <code class="inline">while</code> loop, but the way the condition is set up is different. </p>
-  <p>Instead of using <code class="inline">while</code>, we will use <code class="inline">until</code>. Let’s puts <code class="inline">I love coding!</code> 5 times again! </p>
-  <p>Pay attention to how the condition is written:</p>
-  <pre><code class="hljs ruby">count = <span class="hljs-number">5</span>
-
-  <span class="hljs-keyword">until</span> count == <span class="hljs-number">0</span>
-  puts <span class="hljs-string">"I love coding!"</span>
-  count -= <span class="hljs-number">1</span>
-  <span class="hljs-keyword">end</span></code></pre>
-  <p>Let’s translate this code to plain english.</p>
-  <blockquote><p>Until count is 0, puts “I love coding!”</p>
-  </blockquote>
-  <p>Let’s dissect the code</p>
-  <blockquote><p>We assign 5 to the variable <code class="inline">count</code> because we want the statement 5 times.
-    We start a <code class="inline">until</code> loop which will run the <strong>code block</strong> between <code class="inline">until</code> and <code class="inline">end</code> until the given condition is <strong>true</strong>.
-    So long the count is NOT 0, it will puts <code class="inline">I love coding!</code>
-  After every <code class="inline">I love coding!</code>, it will add the count by 1. The <code class="inline">-=</code> is called an <strong>assignment operator</strong>, which is equivalent to <code class="inline">count = count - 1</code>.</p>
-  </blockquote>
-  <p>Now give <code class="inline">example3.rb</code> a try!</p>
-  <hr class="thin">
-  <h4>Exercise 1:</h4>
-  <p>In <code class="inline">exercise1.rb</code>, write a method call <code class="inline">sum_to</code> which takes in an integer as its argument. </p>
-  <p>In the method, use a <code class="inline">while</code> loop and the assignment operator <code class="inline">+=</code> to find the sum of 1 to the given integer. For example, <code class="inline">sum_to(10)</code> should return the value 55.</p>
-  <hr class="thin">
-  <h4>Exercise 2:</h4>
-  <p>In <code class="inline">exercise2.rb</code>, write a method <code class="inline">run</code> that does not take in any argument. In the method, write code for the following scenario: </p>
-  <ol>
-  <li>Prompt the user for the current room temperature in degree Celcius and then store it in a variable called “room_temperature”
+<div id="challenge-instructions"><h3>Deaf Aunty</h3><div><p>We’re going to model something a little silly: an interaction between you and your imaginary deaf aunty. She exhibits the following inexplicable behavior:</p>
+<ol>
+<li>If you say something but don’t shout all the way, she’ll shout right back: “HUH?! SPEAK UP, SANDRA!”
+</li>
+<li>If you do shout you’re also out of luck, because she’ll misunderstand you and shout back “NO, WE CANNOT DO THAT!”
   </li>
+  <li>She won’t let you leave the room unless you say, politely, “I love ya, aunty, but I’ve got to go.” She may be deaf, but she can smell rude a mile away.
+    </li>
   </ol>
-  <p>2) Create a <code class="inline">while</code> loop to continuously prompt the user for the current room temperature. In the loop, do the following:</p>
-    <ul>
-    <li><p><strong>If</strong> the temperature is below 20 degree celsius, do the following:
-        output “Air Conditioner is on”
-      prompt the user again for the current room temperature</p>
+  <p>How should these behaviors map to code?</p>
+  <table class="table table-bordered table-striped">
+  <thead>
+  <tr>
+  <th>"Real" world</th>
+  <th>Code world</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>Starting a conversation with Aunty</td>
+  <td>Running the program via the command line</td>
+  </tr>
+  <tr>
+  <td>Speaking to your Aunty</td>
+  <td>Reading a line of user input with the <a href="http://www.ruby-doc.org/docs/Tutorial/part_02/user_input.html" target="_blank">gets method</a></td>
+  </tr>
+  <tr>
+  <td>Aunty speaking to you</td>
+  <td>Printing a line to the console using the <a href="http://www.ruby-doc.org/core-1.9.3/IO.html#method-i-puts" target="_blank">puts method</a></td>
+  </tr>
+  <tr>
+  <td>Shouting</td>
+  <td>Either entering or printing text IN ALL CAPS, depending on who is speaking.</td>
+  </tr>
+  <tr>
+  <td>Not Shouting</td>
+  <td>Either entering or printing text in lower case or mix.</td>
+  </tr>
+  <tr>
+  <td>Leaving the conversation</td>
+  <td>Exiting the program</td>
+  </tr>
+  </tbody>
+  </table><p><iframe type="text/html" width="100%" height="480" src="https://www.youtube.com/embed/AHbJ2mZZK4E" frameborder="0"></iframe></p>
+  <h3>As you are coding, ask yourself….</h3>
+  <ul>
+  <li>Are you writing a single, gigantic method or breaking down your program into logical units?
+  </li>
+  </ul>
+  <hr class="thin">
+  <h3>Tasks</h3>
+  <h4>1. Deaf Aunty Doesn’t Gets It</h4>
+  <p>Write a method called <code class="inline">deaf_aunty</code> that models the Aunty-talkin’ rules above. Use <a href="http://www.ruby-doc.org/docs/Tutorial/part_02/user_input.html">gets</a>&nbsp;to prompt the user for input.</p>
+  <p>Create your code logic base off the video above!</p>
+  <h4>2. Changing the Requirements (Optional)</h4>
+  <p>After you have a program that allows you to leave the conversation with Aunty in a civil way, we’re going to add a new requirement. In addition to saying “I love ya, Aunty, but I’ve got to go.” to end the conversation, you also need to silently move away. Set up a new way to exit the program in your method: <strong>when two empty lines are entered in succession <em>by the user</em></strong>. (Both conditions for ending the program should be supported!)</p>
+  <p>How does this change your program? How do you record the “state” of your interaction with Aunty?</p>
+    <hr class="thin">
+    <h4>Getting Creative (Optional)</h4>
+    <p>Consider some further changes to the rules above. Let’s say we want to model some new behavior in our system. Think of how these “real world” scenarios might be modeled in “code world.”</p>
+    <ol>
+    <li>How would you model non-verbal actions, like giving your Aunty a hug?
+    </li>
+    <li>What if Aunty’s behavior changed depending on her mood? Maybe she’s happy in the morning but grumpy at night.
       </li>
-      <li><p><strong>Else</strong> print “Air Conditioner is off” and terminate the “while” loop.</p>
-      </li>
-      </ul>
-      <p><strong>Tip:</strong> Remember that <code class="inline">gets.chomp</code> returns a string even if you typed in a number. How can you convert a string into an integer?</p>
-      <hr class="thin">
-      <h4>Exercise 3:</h4>
-      <p>In <code class="inline">exercise3.rb</code>, instead of using <code class="inline">while</code>, use <code class="inline">until</code> to code the air cond scenario. </p>
-      <hr class="thin">
-      <blockquote><h4>Interesting stuff to find out</h4>
-      <p>You can actually write your <code class="inline">while</code> and <code class="inline">until</code> loop differently. Check out the modifiers from here: <a href="http://devdocs.io/ruby~2.4/syntax/control_expressions_rdoc#label-while+Loop" target="_blank">Ruby modifier <code class="inline">while</code> and <code class="inline">until</code></a></p>
-      </blockquote>
-      <hr class="thin">
-      </div>
+    <li>What if Aunty wants to pinch your cheeks every time you visit?
+    </li>
+    <li>What other scenarios can you think of?
+    </li>
+    </ol>
+    <p>Have some fun! Think of the craziest scenario you can and write a version of Deaf Aunty called <code class="inline">deaf_aunty_crazy</code> which models that scenario.</p>
+    </div><div class="checkbox"></div></div>
