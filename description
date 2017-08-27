@@ -1,21 +1,24 @@
-We will be dealing with some simple string manipulation in this challenge. 
+We will now take a short break from writing code. Let’s learn how to style our code so it is clean, organized, and follow a set of grammatical and syntactic conventions. 
 
-Say you are giving a word where all its letters are downcase. Choose a letter from that word and capitalize it, then return the word with the capitalized letter. 
+Every programmer has their own preferred way of writing code, but the best programmers will utilize (and perhaps even contribute to) the accepted standard for a given language, framework, or Domain Specific Language (DSL). 
+http://martinfowler.com/bliki/DomainSpecificLanguage.html
 
-For example, if you are given the word “edition” and the chosen letter is “d”, the returned word should be “eDition”. 
+There are plenty of style guides for Ruby. Any piece of software (open source or proprietary) should use a style guide. It doesn’t really matter which one, so long as everyone working on the team follows it. 
 
-If the chosen letter is “i”, we will capitalize the first time the letter appears, 
+The example code in this challenge is extremely messy. Using the conventions defined in this Ruby Style Guide, clean up the code. 
 
-The returned word should be “edItion”. 
+In particular, make sure to read the sections on Naming, Comments, and Source Code Layout. 
+https://github.com/bbatsov/ruby-style-guide#naming
+https://github.com/bbatsov/ruby-style-guide#comments
+https://github.com/bbatsov/ruby-style-guide#source-code-layout
 
-In manipulate.rb, write a method called manipulate that takes in two arguments: string and letter. The argument letter should be a letter of the given string. Then write code to manipulate the string as described above. 
+You can rewrite the program any way you desire, so long as you don’t break the driver code (i.e. if you run the program, it should print all true). 
 
-For example 
-p manipulate("hello", "e") 
+Objective 
+Implement style consistency 
+Clean up the code in the program using the conventions outlined in @bbatsov’s Ruby Style Guide.
+https://github.com/bbatsov/ruby-style-guide 
 
-The output is 
-"hEllo" 
+Make sure that the code still works! You are just adding a fresh layer of paint to the walls, not tearing them down. 
 
-Use methods such as index, [], upcase or capitalize for this challenge. DO NOT use gsub or slice here. 
-
-We would like you to get used to the index and [] methods first. There will be other challenges later on where you can use gsub and slice :)
+Note: in your future challenges, start writing your code using the conventions that you have learnt. The more you practise, the more it becomes natural and easier.
