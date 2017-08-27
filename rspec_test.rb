@@ -1,46 +1,50 @@
 require 'rspec'
-require_relative 'company'
+require_relative 'scope'
 
-def should_have_attr_accessor(obj, column_name)
-  file = File.read "company.rb"
-  expect(file).to match(/attr_accessor.+#{column_name}/), "expected attr_accessor for #{column_name}, but got none"
+describe "BasicClass" do
+  let(:object) { BasicClass.new("var") }
 
-  writer = column_name.to_s + "="
-  expect(obj).to respond_to column_name
-  expect(obj).to respond_to writer.to_sym
-end
-
-def should_have_attr_reader(obj, column_name)
-  file = File.read "company.rb"
-  expect(file).to match(/attr_reader.+#{column_name}/), "expected attr_reader for #{column_name}, but got none"
-
-  expect(obj).to respond_to column_name
-end
-
-describe "Company" do
-  let(:company) { Company.new('Next Academy') }
-
-  it "should have attr_accessor :company_name" do
-    should_have_attr_accessor(company, :company_name)
+  describe "#initialize" do
+    it "should take 1 argument and set @instance_var" do
+      expect{ BasicClass.new }.to raise_error ArgumentError
+      expect( object.instance_variable_get(:@instance_var) ).to eq "var"
+    end
   end
 
-  it "should have attr_reader :employees" do
-    should_have_attr_reader(company, :employees)
-  end
-end
-
-describe "Employee" do
-  let(:employee) { Employee.new("Josh", "Master Of The Bootiverse") }
-
-  it "should have attr_accessor :name" do
-    should_have_attr_accessor(employee, :name)
+  it "should have instance method #get_local_var" do
+    expect{ object.get_local_var }.not_to raise_error
+    expect( object.get_local_var ).not_to eq nil
   end
 
-  it "should have attr_accessor :position" do
-    should_have_attr_accessor(employee, :position)
+  describe "(getter/setter method)" do
+    it "#get_instance_var should return @instance_var" do
+      expect(object.get_instance_var).to eq object.instance_variable_get(:@instance_var)
+    end
+
+    it "#set_instance_var= should take 1 argument and set @instance_var" do
+      expect(object.set_instance_var=('another value')).to eq "another value"
+    end
   end
 
-  it "should have attr_reader :id" do
-    should_have_attr_reader(employee, :id)
+  it "should have class variable @@class_var" do
+    expect(BasicClass.class_variable_get(:@@class_var)).not_to eq nil
+  end
+
+  describe "(getter/setter method)" do
+    it "#get_class_var should return @@class_var" do
+      expect(object.get_class_var).to eq BasicClass.class_variable_get(:@@class_var)
+    end
+
+    it "#set_class_var= should take 1 argument and set @@class_var" do
+      expect(object.set_class_var=('another value')).to eq "another value"
+    end
+  end
+
+  it "should have \"global_var\"" do
+    expect($global_var).not_to eq nil
+  end
+
+  it "should have constant THIS_IS_A_CONSTANT" do
+    expect(BasicClass::THIS_IS_A_CONSTANT).not_to eq nil
   end
 end
