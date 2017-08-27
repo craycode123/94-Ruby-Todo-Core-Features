@@ -1,26 +1,35 @@
 require 'rspec'
-require_relative 'house'
+require_relative 'inheritance'
+describe "Inheritance" do
+  it "should have 7 classes: Animal, Mammal, Amphibian, Primate, Frog, Bat & Chimpanzee." do
+    expect{ Animal.new }.not_to raise_error
+    expect{ Mammal.new }.not_to raise_error
+    expect{ Amphibian.new }.not_to raise_error
+    expect{ Primate.new }.not_to raise_error
+    expect{ Frog.new }.not_to raise_error
+    expect{ Bat.new }.not_to raise_error
+    expect{ Chimpanzee.new }.not_to raise_error
+  end
 
-describe "House" do
-  let(:house) { House.new(square_feet: 2000) }
-  describe "#initialize" do
-
-    it "should take a named argument" do
-      expect{ House.new }.not_to raise_error
-      expect{ House.new(address: "Glomac Damansara") }.not_to raise_error
-      expect{ House.new("Glomac Damansara", 2000) }.to raise_error ArgumentError
+  describe "Mammal & Amphibian" do
+    it "should inherit from Animal" do
+      expect(Mammal).to be < Animal
+      expect(Amphibian).to be < Animal
     end
+  end
 
-    it "should declare default values for @sold" do
-      house = House.new(address: "Glomac Damansara",
-                        square_feet: 2000,
-                        num_bedrooms: 3,
-                        num_baths: 2,
-                        cost: 500000,
-                        down_payment: 0.2,
-                        has_tenants: true
-                        )
-      expect(house.sold).not_to be_nil
+  describe "Primate, Chimpanzee & Bat" do
+    it "should inherit from Mammal" do
+      expect(Primate).to be < Mammal
+      expect(Bat).to be < Mammal
+      expect(Chimpanzee).to be < Mammal
+
+    end
+  end
+
+  describe "Frog" do
+    it "should inherit from Amphibian" do
+      expect(Frog).to be < Amphibian
     end
   end
 end
