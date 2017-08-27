@@ -1,17 +1,16 @@
 require 'rspec'
 require_relative 'roman_numerals'
-
 describe "roman_numerals.rb" do
   describe "#to_roman" do
     context "when input is 4" do
-      it "should return \"IIII\"" do
-        expect(to_roman(4)).to eq "IIII"
+      it "should return \"IV\"" do
+        expect(to_roman(4)).to eq "IV"
       end
     end
 
     context "when input is 9" do
-      it "should return \"VIIII\"" do
-        expect(to_roman(9)).to eq "VIIII"
+      it "should return \"IX\"" do
+        expect(to_roman(9)).to eq "IX"
       end
     end
 
@@ -22,14 +21,14 @@ describe "roman_numerals.rb" do
     end
 
     context "when input is 1453" do
-      it "should return \"MCCCCLIII\"" do
-        expect(to_roman(1453)).to eq "MCCCCLIII"
+      it "should return \"MCDLIII\"" do
+        expect(to_roman(1453)).to eq "MCDLIII"
       end
     end
 
     context "when input is 1646" do
-      it "should return \"MDCXXXXVI\"" do
-        expect(to_roman(1646)).to eq "MDCXXXXVI"
+      it "should return \"MDCXLVI\"" do
+        expect(to_roman(1646)).to eq "MDCXLVI"
       end
     end
   end

@@ -42,6 +42,17 @@ puts to_roman(3) == "III"
 puts to_roman(6) == "VI"
 
 # TODO: what other cases could you add to ensure your to_roman method is working?
-puts to_roman(4)
-puts to_roman(1000)
-puts to_roman(3000)
+puts "input | expected | actual"
+puts "--------|----------|-------"
+puts " 4  |    IV    | #{to_roman(4)}"
+puts " 9  |    IX    | #{to_roman(9)}"
+puts " 13 |   XIII   | #{to_roman(13)}"
+puts " 1453 |  MCDLIII | #{to_roman(1453)}"
+puts " 1646 |  MDCXLVI | #{to_roman(1646)}"
+
+puts "Arabic Roman"
+puts "     4 #{to_roman(4)}"
+puts "     9 #{to_roman(9)}"
+puts "    14 #{to_roman(14)}"
+puts "    44 #{to_roman(44)}"
+puts "   944 #{to_roman(944)}"

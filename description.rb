@@ -1,21 +1,25 @@
-<div id="challenge-instructions"><h3>Algorithm Drill: Roman Numerals (Old-School)</h3><div><h3>Roman Numerals as Representation</h3>
-<p>Have you ever seen a 5? I don’t mean the symbol we write on a piece of paper or print to a screen, but an actual, honest-to-goodness 5?</p>
-<p>Of course not. You’ve seen things that somehow embody five: five apples, five fingers, five weekdays on the calendar, a scrap of paper with “5” written on it, and so forth. Think of all the ways you can represent the integer 5.</p>
-<p>Symbols like 5, “five”, V, and IIIII are one way. If you asked a three-year-old, they might hold up the five fingers on their hand or pull out five pennies from their pocket. Computers encode numbers as a sequence of 0s and 1s called <a href="http://en.wikipedia.org/wiki/Binary_number">binary</a>.</p>
-<p><a href="https://en.wikipedia.org/wiki/Map%25E2%2580%2593territory_relation">The map is not the territory</a>, as they say.</p>
-<h3>Tasks</h3>
-<h4>1. Old-school Roman numerals</h4>
-<p>In the early days of Roman numerals, the Romans didn’t bother with any of this new-fangled subtraction ‘IX’ nonsense. No sir, it was straight addition, biggest to littlest—so 9 was written ‘VIIII’ and so on.</p>
-<p>Write a method <code class="inline">to_roman</code> that when passed an integer between 1 and 3000 (or so) returns a string containing the proper old-school Roman numeral.</p>
-<p>In other words, <code class="inline">to_roman(4)</code> should return the string <code class="inline">'IIII'</code>.</p>
-<p>Make sure to test your method by passing it several inputs whose results you know. Test some simple numbers like <code class="inline">to_roman(1)</code> and more complicated numbers like <code class="inline">to_roman(1646)</code>. This serves as a good sanity check.</p>
-<p>Hint: Use the integer division <code class="inline">/</code> and modulus <code class="inline">%</code> methods.</p>
-<p>For reference, these are the building blocks for how we encode numbers with Roman numerals:</p>
-<pre><code class="ruby hljs">I <span class="hljs-number">1</span>
-V <span class="hljs-number">5</span>
-X <span class="hljs-number">10</span>
-L <span class="hljs-number">50</span>
-C <span class="hljs-number">100</span>
-D <span class="hljs-number">500</span>
-M <span class="hljs-number">1000</span></code></pre>
-</div><div class="checkbox"></div></div>
+<div id="challenge-instructions"><h3>Algorithm Drill: Roman Numerals (Modern)</h3><div><h4>2. Modern Roman numerals</h4>
+<p>Eventually, someone thought it would be terribly clever if putting a smaller number before a larger one meant you had to subtract the smaller one. As a result of this development, you must now suffer.</p>
+<p>Rewrite your previous method to return the new-style Roman numerals so when someone calls <code class="inline">to_roman(4)</code>, it should return the string <code class="inline">'IV'</code>. You might want to run a script like this to make sure your program is working as intended:</p>
+<pre><code class="ruby hljs">puts <span class="hljs-string">"My totally sweet testing script"</span>
+puts <span class="hljs-string">""</span>
+puts <span class="hljs-string">"input | expected | actual"</span>
+puts <span class="hljs-string">"------|----------|-------"</span>
+puts <span class="hljs-string">"4 | IV | <span class="hljs-subst">#{to_roman(<span class="hljs-number">4</span>)}</span>"</span>
+puts <span class="hljs-string">"9 | IX | <span class="hljs-subst">#{to_roman(<span class="hljs-number">9</span>)}</span>"</span>
+puts <span class="hljs-string">"13 | XIII | <span class="hljs-subst">#{to_roman(<span class="hljs-number">13</span>)}</span>"</span>
+puts <span class="hljs-string">"1453 | MCDLIII | <span class="hljs-subst">#{to_roman(<span class="hljs-number">1453</span>)}</span>"</span>
+puts <span class="hljs-string">"1646 | MDCXLVI | <span class="hljs-subst">#{to_roman(<span class="hljs-number">1646</span>)}</span>"</span></code></pre>
+<h4>Examples</h4>
+<pre><code class="ruby hljs">Arabic Roman
+<span class="hljs-number">4</span> IV
+<span class="hljs-number">9</span> IX
+<span class="hljs-number">14</span> XIV
+<span class="hljs-number">44</span> XLIV
+<span class="hljs-number">944</span> CMXLIV</code></pre>
+<h3>Roman Numerals vs. Arabic Numerals: Pros and Cons</h3>
+<p>Reflect for a second on the pros and cons of each representation. Imagine you’re an engineer building a system for people to manipulate numbers and you have two proposals before you: use Roman numerals or use the <a href="http://en.wikipedia.org/wiki/Arabic_numerals">Arabic numerals</a>&nbsp;we use today. How do you decide and why?</p>
+  <p>What benefits do Arabic numerals have over Roman numerals as a way to represent numbers? For example, with Arabic numerals we have an obvious way to represent 0. Arabic numerals also typically require fewer characters to represent the same number, e.g., “3111” vs “MMMCXI”.</p>
+    <p>What else? This is a useful thinking exercise in understanding the relationship between how you represent your data and the actions you want to perform on your data: a dynamic you’ll see at play in almost every piece of software you write.</p>
+    <p>For example, if we’re counting people as they walk into a room by marking something on a piece of paper, Arabic numerals are a terrible representation. That’d be like trying to go for a hike and using a political map as a guide. Instead, we opt for using <a href="http://en.wikipedia.org/wiki/Tally_marks">tally marks</a>&nbsp;to count.</p>
+    </div><div class="checkbox"></div></div>
