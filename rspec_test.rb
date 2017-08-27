@@ -1,24 +1,53 @@
-require "rspec"
-require_relative 'shuffle'
+describe "destructive_methods.rb" do
+  describe "#destroy_message" do
+    context "when arguement \"first_half: second_half\"" do
+      let(:arg){ "first_half: second_half" }
 
-describe "shuffle.rb" do
-  describe "#shuffle" do
-    let(:test_array){ [1,2,3,4,5,6] }
-
-    it "should not use Array#shuffle method" do
-      expect_any_instance_of(Array).not_to receive(:shuffle)
-      shuffle(test_array)
+      it "returns \"first_half:\"" do
+        expect(destroy_message(arg)).to eq "first_half:"
+      end
     end
 
-    it "should not use Array#sort_by method" do
-      expect_any_instance_of(Array).not_to receive(:sort_by)
-      shuffle(test_array)
+    context "when arguement \"first_half\"" do
+      let(:arg){ "first_half" }
+
+      it "returns \"first_half\"" do
+        expect(destroy_message(arg)).to eq arg
+      end
     end
 
-    it "should return randomized array of numbers based on input array" do
-      result = shuffle(test_array)
-      expect(result) != test_array
-      expect(result.sort) == test_array
+    it "does not change the original string" do
+      arg = "temp: temp2"
+      string = arg.dup
+      destroy_message(arg)
+      expect(arg).to eq string
+    end
+  end
+
+  describe "#destroy_message!" do
+    context "when arguement \"first_half: second_half\"" do
+      let(:arg){ "first_half: second_half" }
+
+      it "it will change the original string to \"first_half:\"" do
+        string = arg.dup
+        destroy_message!(arg)
+        expect(arg).not_to eq string
+        expect(arg).to eq "first_half:"
+      end
+    end
+
+    context "when arguement \"first_half\"" do
+      let(:arg){ "first_half" }
+
+      it "returns nil" do
+        expect(destroy_message!(arg)).to eq nil
+      end
+
+      it "does not change the original string" do
+        string = arg.dup
+        destroy_message!(arg)
+        expect(arg).to eq string
+      end
     end
   end
 end

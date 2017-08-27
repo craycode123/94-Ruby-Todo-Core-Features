@@ -1,9 +1,46 @@
-<div><p>Sometimes, you want to add a bit of chaos to your data. Too many ordered lists can get… boring.</p>
-<p>Writing your own <code class="inline">shuffle</code> method is a good way to explore looping through collections.</p>
-<p>And no, you are <strong>not</strong> allowed to use <code class="inline">Array#shuffle</code> method or <code class="inline">Array#sort_by</code>. The point of this challenge is to get you to delve into the algorithm, not use a pre-built solution. That would be a cop-out.</p>
-<h3>Task</h3>
-<h4>Write a Method to Shuffle an Array</h4>
-<p>Write a <code class="inline">shuffle</code> method that takes an array and returns a new array with all of the elements in a random order. One important property of a good <code class="inline">shuffle</code> method is that every permutation is equally likely.</p>
-<p>As usual, start by writing a pseudo-code on how you would approach this. You will need to use loops, arrays,&nbsp;<code class="inline">rand</code> or <code class="inline">Array#sample</code>, and also know how to access elements in an array. The&nbsp;<a href="https://en.wikipedia.org/wiki/Fisher-Yates_shuffle">Knuth shuffle method</a>&nbsp;may be helpful for you to get started. Remember that you can always use the <strong>irb</strong> to help you try out what&nbsp;<code class="inline">rand</code>or <code class="inline">Array#sample</code>&nbsp;does. You may also find <a href="https://github.com/thoughtbot/til/blob/master/ruby/parallel-assignment.md">parallel assignments</a> useful here.</p>
-<p>Use the driver code in the gist to check and be sure that the method truly does shuffle the elements in the array each time it is called.</p>
+<div><p>The fundamental way that programmers organize their code is by writing methods. Methods (the code you write between <code class="inline">def</code> and <code class="inline">end</code>) have input, output, and side-effects.</p>
+<p>A method’s input is the arguments you pass in, such as in <code class="inline">puts "hi mom"</code>, where the <code class="inline">puts</code> method’s input is the argument “hi mom”. The <code class="inline">puts</code> method takes input, but only ever returns <code class="inline">nil</code>as output. Its side-effect is that it writes to STDOUT. On the other hand, many methods have no side-effects and are purely input/output. For example, <code class="inline">File.exists?("app/models")</code> takes <code class="inline">"app/models"</code> as input, and returns <code class="inline">true</code> or <code class="inline">false</code>.</p>
+<p>One of the conventions that you’ll learn in Ruby is that methods with side-effects are appended with a <code class="inline">!</code> (what programmers call a “bang”). This helps future programmers calling these methods understand that when they call it, something serious is happening behind the scenes.</p>
+<p>For this exercise, you will write a function (a method with no side-effects), and then a method with the side-effect of “destroying” its input argument.</p>
+<p><em>Note: the bang <code class="inline">!</code> symbol is used because permanently modifying data is dangerous. Use destructive methods with caution.</em></p>
+<h3>Tasks</h3>
+<h4>Rules for your method</h4>
+<p>You will be writing two versions of a method called <code class="inline">destroy_message</code> which takes in a string identified by the variable <code class="inline">message</code> and modifies that string based upon the following rules:</p>
+<ul>
+<li><p>A message is a string that may or may not contain a <code class="inline">":"</code>.</p>
+</li>
+<li><p>If the original message contains a <code class="inline">":"</code> then all content after (but not including) the <code class="inline">":"</code> is removed when the message self-destructs. So if the original message is <code class="inline">"This message will self destruct: Ruby is fun"</code> it will then return <code class="inline">"This message will self destruct:"</code>.</p>
+</li>
+<li><p>If the original message does not contain a <code class="inline">":"</code> then it will not change when it is destructed.</p>
+</li>
+</ul>
+<h4>Writing methods with no side effects</h4>
+<p>Start by writing the <code class="inline">destroy_message</code> method following the rules outlined above. It <strong>must not</strong> permanently alter the original string passed in.</p>
+<p>What does that mean? Here is an example of a <em>non-destructive</em> method:</p>
+<pre><code class="ruby hljs">name = <span class="hljs-string">"Mr. Billy Jones"</span>
+
+<span class="hljs-comment"># The String#sub method replaces one part of the string</span>
+<span class="hljs-comment"># with another and returns the new, modified string.</span>
+name.sub(<span class="hljs-string">'Jones'</span>, <span class="hljs-string">'Jimmy Jones'</span>)
+<span class="hljs-comment"># =&gt; "Mr. Billy Jimmy Jones"</span>
+
+<span class="hljs-comment"># But it does NOT permanently change the string, as we</span>
+<span class="hljs-comment"># can see here:</span>
+name
+<span class="hljs-comment"># =&gt; "Mr. Billy Jones"</span>
+
+<span class="hljs-comment">### Destroying everything!</span></code></pre>
+<p>Now, write the method <code class="inline">destroy_message!</code> which does the same thing as <code class="inline">destroy_message</code> (without the <code class="inline">!</code>) <strong>except</strong> that this new method will permanently modify the original string.</p>
+<p>What does it mean to permanently modify a piece of data? Here is an example of a <em>destructive</em> method:</p>
+<pre><code class="ruby hljs">name = <span class="hljs-string">"Mr. Billy Jones"</span>
+
+<span class="hljs-comment"># The String#sub! method replaces one part of the ORIGINAL</span>
+<span class="hljs-comment"># string with another and returns the modified string.</span>
+name.sub!(<span class="hljs-string">'Jones'</span>, <span class="hljs-string">'Jimmy Jones'</span>)
+<span class="hljs-comment"># =&gt; "Mr. Billy Jimmy Jones"</span>
+
+<span class="hljs-comment"># When you call #sub! on a string, it permanently modifies</span>
+<span class="hljs-comment"># the original value.</span>
+name
+<span class="hljs-comment"># =&gt; "Mr. Billy Jimmy Jones"</span></code></pre>
 </div>
