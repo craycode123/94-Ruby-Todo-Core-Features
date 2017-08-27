@@ -1,52 +1,73 @@
-require 'rspec'
-require_relative 'power_of_enumerables'
+describe "argument_error_1.rb" do
+  before(:each) { load 'argument_error_1.rb' if File.exist?('argument_error_1.rb') }
 
-describe "print_odd_indexed_integers([2, 4, 6, 8, 10, 12])" do
-  let(:action) { print_odd_indexed_integers([2, 4, 6, 8, 10, 12])  }
+  it "should not raise any errors" do
+    expect{ run }.not_to raise_error
+  end
 
-  it "should print \"4\\n8\\n12\"" do
-    expect{ action }.to output(/4\n8\n12/).to_stdout
+  it "should not change the \"mean\" function" do
+    expect{ mean(5,3,6,10) }.to raise_error ArgumentError
   end
 end
 
-describe "odd_integers([3, 4, 7, 9, 10, 16])" do
-  let(:action) { odd_integers([3, 4, 7, 9, 10, 16]) }
+describe "argument_error_2.rb" do
+  before(:each) { load 'argument_error_2.rb' if File.exist?('argument_error_2.rb') }
 
-  it "should return [3, 7, 9]" do
-    expect(action).to eq [3, 7, 9]
+  it "should not raise any errors" do
+    expect{ run }.not_to raise_error
+  end
+
+  it "should allow the \"mean\" method to accept multiple arguements" do
+
+    expect{ mean(5,6,7,8) }.not_to raise_error
   end
 end
 
-describe "first_under([13, 21, 7, 0, 11, 106], 10)" do
-  let(:action){ first_under([13, 21, 7, 0, 11, 106], 10) }
+describe "type_error.rb" do
+  before(:each){ load 'type_error.rb'  if File.exist?('type_error.rb')}
+  let(:words) { %w{ all i can say is that my life is pretty plain } }
+  let(:words_with_nil) { words.dup.insert(3, nil) }
+  let(:mixed_array) { ["2", 1, "5", 4, "3"] }
 
-  it "should return 7" do
-    expect(action).to eq 7
-  end
-end
-
-describe "add_bang([\"hi\", \"mom\"])" do
-  let(:action) { add_bang(["hi", "mom"]) }
-
-  it "should return [\"hi!\", \"mom!\"]" do
-    expect(action).to eq ["hi!", "mom!"]
-  end
-end
-
-describe "sum([1, 1, 2, 3, 5])" do
-  let(:action) { sum([1, 1, 2, 3, 5]) }
-
-  it "should return 12" do
-    expect(action).to eq 12
-  end
-end
-
-describe "sorted_triples(words)" do
-  let(:words) { %w(the salted pork is particularly good) }
-  let(:action) { sorted_triples(words) }
-
-  it "should return [[\"pork\", \"salted\", \"the\"], [\"good\", \"is\", \"particularly\"]]" do
-    expect(action).to eq [["pork", "salted", "the"], ["good", "is", "particularly"]]
+  def custom_sort(array)
+    converted_array = array.map{ |elem| elem.nil? ? "nil" : elem.to_s }
+    converted_array.sort
   end
 
+  it "should not raise any errors" do
+    expect{ run }.not_to raise_error
+  end
+
+  describe "#print_and_sort(words)" do
+    it "should print \"all i can say is that my life is pretty plain\"" do
+      regex = /all i can say is that my life is pretty plain/
+      expect{ print_and_sort(words) }.to output(regex).to_stdout
+    end
+
+    it "should sort words" do
+      expect( print_and_sort(words) ).to eq custom_sort(words)
+    end
+  end
+
+  describe "#print_and_sort(words_with_nil)" do
+    it "should print \"all i can nil say is that my life is pretty plain\"" do
+      regex = /all i can nil say is that my life is pretty plain/
+      expect{ print_and_sort(words_with_nil)}.to output(regex).to_stdout
+    end
+
+    it "should sort words_with_nil"do
+      expect( print_and_sort(words_with_nil) ).to eq custom_sort(words_with_nil)
+    end
+  end
+
+  describe "#print_and_sort(mixed_array)" do
+    it "should print \"2 1 5 4 3\"" do
+      regex = /2 1 5 4 3/
+      expect{ print_and_sort(mixed_array) }.to output(regex).to_stdout
+    end
+
+    it "should sort mixed_array" do
+      expect( print_and_sort(mixed_array) ).to eq custom_sort(mixed_array)
+    end
+  end
 end
