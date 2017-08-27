@@ -1,32 +1,57 @@
-<div><p>A central component of good object-oriented design is understanding how much of an object to <em>expose</em>.</p>
-<p><em>Exposing</em> an object means making its properties (internal data) available to the “public”, i.e. other objects in the program or even other programs. Together, these public methods make up an object’s <strong>public interface</strong> . The methods which are private (accessible only within the object itself) make up its <strong>private interface</strong> .</p>
-<p>As a general rule, you should only expose as much of an object as is needed for other objects to interact with it. Design objects that can take care of their own properties. They shouldn’t just invite everyone else in to mess around with their business.</p>
-<p>To play with this principle, let’s build a simple <code class="inline">BankAccount</code> class that stores information about a bank account.</p>
+<div><p>California grows oranges - mostly <a href="http://en.wikipedia.org/wiki/Orange_%2528fruit%2529#Navel_oranges">Washington Navel oranges</a>&nbsp;and <a href="http://en.wikipedia.org/wiki/Valencia_orange">Valencia oranges</a>, for the botanists among us.</p>
+<p>Let’s create a toy program to model an orange tree growing over the years. We plant the orange tree, wait for it to bear some fruit, and then pick all the oranges as soon as it does.</p>
+<p>The script might look like this:</p>
+<pre><code class="ruby hljs">    tree = OrangeTree.new
+
+tree.age! <span class="hljs-keyword">until</span> tree.any_oranges?
+
+puts <span class="hljs-string">"Tree is <span class="hljs-subst">#{tree.age}</span> years old and <span class="hljs-subst">#{tree.height}</span> feet tall"</span>
+
+<span class="hljs-keyword">until</span> tree.dead?
+basket = []
+
+<span class="hljs-comment"># It places the oranges in the basket</span>
+<span class="hljs-keyword">while</span> tree.any_oranges?
+basket &lt;&lt; tree.pick_an_orange!
+<span class="hljs-keyword">end</span>
+
+avg_diameter = <span class="hljs-comment"># It's up to you to calculate the average diameter for this harvest.</span>
+
+puts <span class="hljs-string">"Year <span class="hljs-subst">#{tree.age}</span> Report"</span>
+puts <span class="hljs-string">"Tree height: <span class="hljs-subst">#{tree.height}</span> feet"</span>
+puts <span class="hljs-string">"Harvest: <span class="hljs-subst">#{basket.size}</span> oranges with an average diameter of <span class="hljs-subst">#{avg_diameter}</span> inches"</span>
+puts <span class="hljs-string">""</span>
+
+<span class="hljs-comment"># Age the tree another year</span>
+tree.age!
+<span class="hljs-keyword">end</span>
+
+puts <span class="hljs-string">"Alas, the tree, she is dead!"</span>
+</code></pre>
+<p>In this challenge, you will be modeling a simple system with two objects: orange trees and oranges. You’ll be applying what you have learnt about&nbsp;<strong>variable scope</strong>, and &nbsp;<strong>attr_reader/writer/accessor</strong> methods here.  </p>
 <h3>Objectives</h3>
-<h4>Def initialize</h4>
-<p>Define the class <code class="inline">BankAccount</code>.</p>
-<p>It should have three instance variables: <code class="inline">@customer_name</code>, <code class="inline">@type</code>, and <code class="inline">@acct_number</code>.</p>
-<p>Define an <code class="inline">initialize</code> method that takes three arguments and assigns them to the above instance variables. It should look something like this:</p>
-<pre><code class="ruby hljs">    my_acct = BankAccount.new(<span class="hljs-string">"Junipero Serra"</span>, <span class="hljs-string">"Checking"</span>, <span class="hljs-string">"347-923-239"</span>)</code></pre>
-<h4>Redefine to_s</h4>
-<p>One more requirement: define an instance method <code class="inline">to_s</code> that will return a string with information about the account.</p>
-<p>You will probably come across other classes in Ruby that redefine the built-in method <code class="inline">to_s</code>. This is an easy way to display relevant information about an object to the user, and to control which information is conveyed.</p>
-<p>As an example, here is one way to display object information:</p>
-<pre><code class="ruby hljs">    my_acct.to_s
-<span class="hljs-comment"># =&gt; "Junipero Serra: Checking# ***** 3239"</span></code></pre>
-<p>Once you define <code class="inline">to_s</code>, you can interpolate your objects in strings like this:</p>
-<pre><code class="ruby hljs">    str = <span class="hljs-string">"My account information is <span class="hljs-subst">#{my_acct}</span>"</span>
-<span class="hljs-comment"># =&gt; "My account information is Junipero Serra: Checking# ***** 3239"</span></code></pre>
-<h4>Define getter methods</h4>
-<p>When you create a new instance of <code class="inline">BankAccount</code>, do you have access to any of the values stored in its instance variables? No? Good.</p>
-  <p>The way we get read access to variables stored within a class is through a pattern called a <em>getter method</em>.</p>
-  <p>Which of the instance variables should have associated <em>getter</em> methods?</p>
-  <p>Think about the implications behind defining a getter method. Which variables should expose themselves in this way? Which values should be hidden and protected from the outside world?  </p>
-  <h4>Define setter methods</h4>
-  <p>Now think about which variables should be able to be <em>written</em> to.</p>
-  <p>Then define your setter method(s).  </p>
-  <h4>Hide the account</h4>
-  <p>You probably recognized that it might not be a good idea to expose the account number via a getter or setter method. That is just the kind of information that should remain private.</p>
-  <p>Sometimes, though, it is useful to expose part of a value. If a user has many checking accounts, then it might be useful to display some kind of information that allows them to distinguish between the accounts without seeing the full account number.</p>
-  <p>How would you get around this problem? What kind of method can you define that will return enough information about the account to be able to distinguish it from other accounts, without exposing the full number?</p>
-  </div>
+<h4>Implement the OrangeTree and Orange classes</h4>
+<p>Use <code class="inline">attr_reader</code>, <code class="inline">attr_writer</code>, and/or <code class="inline">attr_accessor</code> so that we can call <code class="inline">tree.height</code> and <code class="inline">tree.age</code> to get a tree’s height or age, respectively. Which of the three <code class="inline">attr_</code> methods should you be using and why?</p>
+<p>Do the same with the <code class="inline">Orange</code> class so that we can call <code class="inline">orange.diameter</code> to get an orange’s diamater.  </p>
+<h4>Implement Aging</h4>
+<p>As a tree ages, it grows taller. Eventually it starts bearing fruit and stops growing - not necessarily at the same time. Some years later, the tree dies and can bear fruit no more!</p>
+<p>Implement an <code class="inline">OrangeTree#age!</code> instance method that will age your tree one year. Each year the tree should get some amount taller, and then eventually stop growing. You can decide when the tree stops growing.</p>
+<p>Later, it should die. At this point your <code class="inline">OrangeTree</code> class should:</p>
+<ol>
+<li>Have an <code class="inline">OrangeTree#height</code> method which returns the tree’s current height
+</li>
+<li>Have an <code class="inline">OrangeTree#age</code> method which returns the tree’s current age
+</li>
+<li>Have an <code class="inline">OrangeTree#age!</code> method which ages the tree one year and grows the tree a little, if it’s able to grow
+</li>
+<li>Have an <code class="inline">OrangeTree#dead?</code> method which returns <code class="inline">true</code> if the tree has died
+</li>
+</ol>
+<h4>Implement Orange-picking</h4>
+<p>After some number of years - you decide the number - the orange tree starts to bear fruit. Write a method <code class="inline">OrangeTree#any_oranges?</code> which returns <code class="inline">true</code> if there are any oranges on the tree and <code class="inline">false</code> otherwise.</p>
+<p>Also write a method <code class="inline">OrangeTree#pick_an_orange!</code> which will return one of the oranges on the tree (an instance of the <code class="inline">Orange</code> class). If you try to pick an orange when there are no oranges left, your code should raise a <code class="inline">NoOrangesError</code> (defined in the source code).</p>
+<p>You’ll also have to implement the <code class="inline">Orange</code> class at this point, including <code class="inline">Orange.new</code> and <code class="inline">Orange#diameter</code>.  </p>
+<h4>Does the script run?</h4>
+<p>Does the script at the top of the challenge run and output what you’d expect? (Hint: you have to be clear about your expectations before you an answer that question.)</p>
+<p>If not, what are the errors or unexpected behaviors? Do you understand them?</p>
+</div>
