@@ -1,13 +1,39 @@
-<div><p>Vroom vroom! We’re going to build a simple game called <em>Ruby Racer</em>. This is a “game” like <a href="http://en.wikipedia.org/wiki/Snakes_and_Ladders">Snakes and Ladders</a>&nbsp;: the fixed board layout and random rolls of the dice completely determine the outcome.</p>
-<p>The game works like a (random and much quieter) drag race. There are two players. Each starts with a “car” sitting at the beginning of the track, side-by-side. The track is <code class="inline">N</code> squares long. Players take turns rolling a die and advance their car according to the value of the roll.</p>
-<p>Note that this challenge is about modeling a simple game with little human interaction and no strategy. You’ll learn a bit about how console output works when you have to print the board. The starting code is well-written, so pay attention to the style, what methods exist, what their inputs and return values are, and how they segment the actions necessary to “play” the game.</p>
+<div><p>Any Ruby program you write is running inside another pieces of software: the Ruby interpreter. And that interpreter is itself running inside another piece of software: your operating system. These software layers “outside” your Ruby program are called <strong>the environment</strong> and there are many ways you can shuttle data between the environment and your program.</p>
+<p>One way is via the <code class="inline">ARGV</code> constant which comes pre-defined in every Ruby program. It is an <code class="inline">Array</code> of <code class="inline">Strings</code> representing the command line arguments. Consider this simple program:</p>
+<pre><code class="ruby hljs">puts <span class="hljs-string">"The command line arguments are:"</span>
+puts ARGV.inspect
+puts <span class="hljs-string">""</span></code></pre>
+<p>The output looks like this:</p>
+<pre><code class="bash hljs ruby">$ ruby argv.rb these are
+The command line arguments <span class="hljs-symbol">are:</span>
+[<span class="hljs-string">"these"</span>, <span class="hljs-string">"are"</span>]
+
+$ ruby argv.rb these are the command line arguments
+The command line arguments <span class="hljs-symbol">are:</span>
+[<span class="hljs-string">"these"</span>, <span class="hljs-string">"are"</span>, <span class="hljs-string">"the"</span>, <span class="hljs-string">"command"</span>, <span class="hljs-string">"line"</span>, <span class="hljs-string">"arguments"</span>]
+
+$ ruby argv.rb <span class="hljs-string">"this come in as one"</span> <span class="hljs-string">"this comes in as two"</span>
+The command line arguments <span class="hljs-symbol">are:</span>
+[<span class="hljs-string">"this come in as one"</span>, <span class="hljs-string">"this comes in as two"</span>]
+
+$</code></pre>
 <h3>Objectives</h3>
-<h4>Implement Using the Skeleton Code</h4>
-<p>The source gist for this challenge contains a lot of skeleton code; use it! You should mostly be filling out the pre-defined <code class="inline">RubyRacer</code> class, although feel free to dress up the output and have a little fun with the logic of the game. Maybe add some totally sweet <a href="https://github.com/miketierney/artii">ACSII art</a>?</p>
-<p>Here’s what the output should look like, roughly:</p>
-<p><iframe style="margin: 0 auto; display: block;" src="//www.youtube.com/embed/FzZYE6drMxQ?hd=1&amp;showinfo=0" width="560" height="349" frameborder="0" allowfullscreen=""></iframe></p>
-<p><strong>Note</strong> : Are you assuming there are only two players and they’re always labeled <code class="inline">'a'</code> and <code class="inline">'b'</code>? Why? If it’s intentional as a means to get a simpler version up and running, that’s fine, but it’s important to be clear about what assumptions your program is making and why! Try to write a version that accepts any number of players (identified by single characters) as input.  </p>
-<h4>Think of Fun Additions</h4>
-<p>As a thought experiment, think about what would make this game more fun? Powerups? Landmines that send you back to the start? More player control?</p>
-<p>Is your code well-suited to adding these features or would it be difficult?</p>
-</div>
+<h4>ARGV-ify Pig Latin</h4>
+<p>Take your pig latin script and augment it so you can do the following:</p>
+  <pre><code class="bash hljs ruby">$ ruby pig_latin.rb i love baseball
+  i ovelay aseballbay
+  $</code></pre>
+  <p>Save your file under <code class="inline">pig_latin.rb</code> and check if it passes the tests!</p>
+  <h4>ARGV-ify An ATM</h4>
+  <p>Now that you are more acquainted with ARGV, let’s ARGV-ify an ATM. In your code, set your bank balance to be 10 dollars. Then using ARGV, allow the user to <em>add</em>, <em>withdraw</em>, and <em>check</em> bank balance. An example is as follows:</p>
+  <pre><code class="bash hljs ruby">$ ruby atm.rb add <span class="hljs-number">10</span>
+  Your balance is now <span class="hljs-number">20</span> dollars.</code></pre>
+  <p>Note that you will now need to pass in two arguments in the command line. How would you do that? By the way, for this exercise, don’t worry about using classes. Just keep it simple.</p>
+    <p>Save your file under <code class="inline">atm.rb</code> and check if it passes the tests!</p>
+    <h4>ARGV-ify A Calculator</h4>
+    <p>Make a simple calculator&nbsp;script that can perform the 4 basic math operations (+, -, x, /) and augment it so you can do the following:</p>
+                                                                                          <pre><code class="bash hljs ruby">$ ruby calc.rb <span class="hljs-number">3</span> + <span class="hljs-number">4</span>
+                                                                                          <span class="hljs-number">7</span></code></pre>
+                                                                                          <p>Note, you’ll have to pass in the arguments in quotes because some characters have special meaning on the command-line. <code class="inline">*</code> for example means “every file in the current directory.” Probably not what you want to pass in as command-line arguments!</p>
+                                                                                          <p><em>Extra Credit:</em> instead of building a simple calculator, build an <a href="https://en.wikipedia.org/wiki/Reverse_Polish_notation">RPN calculator</a>!</p>
+                                                                                          </div>
