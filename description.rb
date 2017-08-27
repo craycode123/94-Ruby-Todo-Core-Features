@@ -1,57 +1,64 @@
-<div><p>California grows oranges - mostly <a href="http://en.wikipedia.org/wiki/Orange_%2528fruit%2529#Navel_oranges">Washington Navel oranges</a>&nbsp;and <a href="http://en.wikipedia.org/wiki/Valencia_orange">Valencia oranges</a>, for the botanists among us.</p>
-<p>Let’s create a toy program to model an orange tree growing over the years. We plant the orange tree, wait for it to bear some fruit, and then pick all the oranges as soon as it does.</p>
-<p>The script might look like this:</p>
-<pre><code class="ruby hljs">    tree = OrangeTree.new
-
-tree.age! <span class="hljs-keyword">until</span> tree.any_oranges?
-
-puts <span class="hljs-string">"Tree is <span class="hljs-subst">#{tree.age}</span> years old and <span class="hljs-subst">#{tree.height}</span> feet tall"</span>
-
-<span class="hljs-keyword">until</span> tree.dead?
-basket = []
-
-<span class="hljs-comment"># It places the oranges in the basket</span>
-<span class="hljs-keyword">while</span> tree.any_oranges?
-basket &lt;&lt; tree.pick_an_orange!
-<span class="hljs-keyword">end</span>
-
-avg_diameter = <span class="hljs-comment"># It's up to you to calculate the average diameter for this harvest.</span>
-
-puts <span class="hljs-string">"Year <span class="hljs-subst">#{tree.age}</span> Report"</span>
-puts <span class="hljs-string">"Tree height: <span class="hljs-subst">#{tree.height}</span> feet"</span>
-puts <span class="hljs-string">"Harvest: <span class="hljs-subst">#{basket.size}</span> oranges with an average diameter of <span class="hljs-subst">#{avg_diameter}</span> inches"</span>
-puts <span class="hljs-string">""</span>
-
-<span class="hljs-comment"># Age the tree another year</span>
-tree.age!
-<span class="hljs-keyword">end</span>
-
-puts <span class="hljs-string">"Alas, the tree, she is dead!"</span>
-</code></pre>
-<p>In this challenge, you will be modeling a simple system with two objects: orange trees and oranges. You’ll be applying what you have learnt about&nbsp;<strong>variable scope</strong>, and &nbsp;<strong>attr_reader/writer/accessor</strong> methods here.  </p>
+<div><p><strong>I &lt;3 Cookies</strong> is a bakery that makes delicious cookies. They are growing rapidly, and they need some software to help them manage their kitchen.</p>
+<p>Your job is to build a program that will help them manage their cookie baking. Here are a few user stories to help get you started:</p>
+<ul>
+<li>As a baker, I want to make different types of cookies (peanut butter, chocolate chip, etc.).
+  </li>
+<li>As a baker, I want to place batches of cookies in an oven.
+  </li>
+<li>As a baker, I want to know when a batch of cookies is ready to be removed from the oven.
+  </li>
+</ul>
+<p>The point of this challenge is to exercise your object-oriented design muscles. It’s time to apply the concepts that you have learnt in previous challenges over here. Are you up for it?&nbsp;</p>
 <h3>Objectives</h3>
-<h4>Implement the OrangeTree and Orange classes</h4>
-<p>Use <code class="inline">attr_reader</code>, <code class="inline">attr_writer</code>, and/or <code class="inline">attr_accessor</code> so that we can call <code class="inline">tree.height</code> and <code class="inline">tree.age</code> to get a tree’s height or age, respectively. Which of the three <code class="inline">attr_</code> methods should you be using and why?</p>
-<p>Do the same with the <code class="inline">Orange</code> class so that we can call <code class="inline">orange.diameter</code> to get an orange’s diamater.  </p>
-<h4>Implement Aging</h4>
-<p>As a tree ages, it grows taller. Eventually it starts bearing fruit and stops growing - not necessarily at the same time. Some years later, the tree dies and can bear fruit no more!</p>
-<p>Implement an <code class="inline">OrangeTree#age!</code> instance method that will age your tree one year. Each year the tree should get some amount taller, and then eventually stop growing. You can decide when the tree stops growing.</p>
-<p>Later, it should die. At this point your <code class="inline">OrangeTree</code> class should:</p>
+<h4>Design the structure</h4>
+<p>Think about this problem critically before you even begin to write code and describe how you would design the program in plain English.</p>
+<p>At the very least, consider these questions in your answer:</p>
+<ul>
+<li>What are essential classes?
+</li>
+<li>What attributes will each class have?
+</li>
+<li>What interface will each class provide?
+</li>
+<li>How will the classes interact with each other?
+</li>
+<li>Which classes will inherit from others, if any?
+</li>
+</ul>
+<h4>Step 1: MVP</h4>
+<p>Implement a minimum viable product.</p>
+<p>It does not need to track multiple types of cookies, but you should be able to move cookies into and out of an oven.  </p>
+<h4>Step 2: Additional Features</h4>
+<p>Add more features to your program.</p>
+<ul>
+<li>Multiple types of cookies, each with a different baking time
+</li>
+<li>Status <strong>attribute</strong> for cookies, with at least these possible values: <code class="inline">:doughy</code>, <code class="inline">:almost_ready</code>, <code class="inline">:ready</code>, <code class="inline">:burned</code>
+</li>
+</ul>
+<h4>Step 3: Refactor</h4>
+<p>Take a step back and look at the code you’ve produced. Run through a checklist to see if you are following the principles of object-oriented design:</p>
+<ul>
+<li>Is it DRY (Don’t Repeat Yourself)?
+</li>
+<li>Do your classes follow the <a href="http://en.wikipedia.org/wiki/Law_of_Demeter">Law of Demeter</a>?
+</li>
+<li>Are your classes <a href="http://stackoverflow.com/a/1527430">orthogonal</a>?
+</li>
+<li>Do you expose only the minimum amount of surface area for each object?
+</li>
+</ul>
+<hr class="thick">
+<p>The Law of Demeter can be summarized as follows:</p>
+<p><em>For all classes C. and for all methods M attached to C, all objects to which M sends a message must be instances of classes associated with the following classes:</em></p>
 <ol>
-<li>Have an <code class="inline">OrangeTree#height</code> method which returns the tree’s current height
-</li>
-<li>Have an <code class="inline">OrangeTree#age</code> method which returns the tree’s current age
-</li>
-<li>Have an <code class="inline">OrangeTree#age!</code> method which ages the tree one year and grows the tree a little, if it’s able to grow
-</li>
-<li>Have an <code class="inline">OrangeTree#dead?</code> method which returns <code class="inline">true</code> if the tree has died
-</li>
+<li>The argument classes of M (including C).
+  </li>
+<li>The instance variable classes of C.
+  </li>
 </ol>
-<h4>Implement Orange-picking</h4>
-<p>After some number of years - you decide the number - the orange tree starts to bear fruit. Write a method <code class="inline">OrangeTree#any_oranges?</code> which returns <code class="inline">true</code> if there are any oranges on the tree and <code class="inline">false</code> otherwise.</p>
-<p>Also write a method <code class="inline">OrangeTree#pick_an_orange!</code> which will return one of the oranges on the tree (an instance of the <code class="inline">Orange</code> class). If you try to pick an orange when there are no oranges left, your code should raise a <code class="inline">NoOrangesError</code> (defined in the source code).</p>
-<p>You’ll also have to implement the <code class="inline">Orange</code> class at this point, including <code class="inline">Orange.new</code> and <code class="inline">Orange#diameter</code>.  </p>
-<h4>Does the script run?</h4>
-<p>Does the script at the top of the challenge run and output what you’d expect? (Hint: you have to be clear about your expectations before you an answer that question.)</p>
-<p>If not, what are the errors or unexpected behaviors? Do you understand them?</p>
-</div>
+<p><em>(Objects created by M, or by functions or methods which M calls, and objects in global variables are considered as arguments of M.)</em></p>
+<p>Read <a href="http://devblog.avdi.org/2011/07/05/demeter-its-not-just-a-good-idea-its-the-law/">Avdi Grim’s post</a>&nbsp;for a more thorough explanation.</p>
+  <h3>Get Creative!</h3>
+  <p>Put yourself in the baker’s shoes, and imagine what other features you might like to have. Then pick the most useful and feasible one and build it out.</p>
+  </div>
