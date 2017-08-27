@@ -1,54 +1,36 @@
 require 'rspec'
-describe "exercise1.rb" do
-  before(:all){ require_relative "exercise1.rb" }
+require_relative 'roman_numerals'
 
-  describe "#sum_to(10)" do
-    it "should return 55" do
-      expect(sum_to(10)).to eq 55
+describe "roman_numerals.rb" do
+  describe "#to_roman" do
+    context "when input is 4" do
+      it "should return \"IIII\"" do
+        expect(to_roman(4)).to eq "IIII"
+      end
     end
 
-    it "should use \"for\"loop" do
-      expect_any_instance_of(Kernel).to receive(:for).at_least(1).times
+    context "when input is 9" do
+      it "should return \"VIIII\"" do
+        expect(to_roman(9)).to eq "VIIII"
+      end
     end
 
-    it "should not use \"while\" loop" do
-      expect_any_instance_of(Kernel).not_to receive(:while)
-    end
-  end
-end
-
-describe "exercise2.rb" do
-  before(:all){ require_relative "exercise2.rb" }
-
-  describe "#diamond(num,char)" do
-    it "should return 41" do
-      expect(diamond(4, "*")).to eq 41
+    context "when input is 13" do
+      it "should return \"XIII\"" do
+        expect(to_roman(13)).to eq "XIII"
+      end
     end
 
-    it "should use \"for\"loop" do
-      expect_any_instance_of(Kernel).to receive(:for).at_least(1).times
+    context "when input is 1453" do
+      it "should return \"MCCCCLIII\"" do
+        expect(to_roman(1453)).to eq "MCCCCLIII"
+      end
     end
 
-    it "should not use \"while\" loop" do
-      expect_any_instance_of(Kernel).not_to receive(:while)
-    end
-  end
-end
-
-describe "exercise3.rb" do
-  before(:all){ require_relative "exercise3.rb" }
-
-  describe "#hollow_diamond(num,char)" do
-    it "should return 16" do
-      expect(diamond(4, "*")).to eq 16
-    end
-
-    it "should use \"for\"loop" do
-      expect_any_instance_of(Kernel).to receive(:for).at_least(1).times
-    end
-
-    it "should not use \"while\" loop" do
-      expect_any_instance_of(Kernel).not_to receive(:while)
+    context "when input is 1646" do
+      it "should return \"MDCXXXXVI\"" do
+        expect(to_roman(1646)).to eq "MDCXXXXVI"
+      end
     end
   end
 end

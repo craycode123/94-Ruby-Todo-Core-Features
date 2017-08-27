@@ -1,38 +1,21 @@
-<div id="challenge-instructions"><h3>Looping: for</h3><div><p>At times we may not need to use a <code class="inline">while</code> or <code class="inline">until</code> loop, especially when you are given a specific range of numbers. For example, we would like to print out numbers from 1 to 10. Instead of using a <code class="inline">while</code> loop, we can use a <code class="inline">for</code> loop. For example,</p>
-<pre><code class="hljs ruby"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>..<span class="hljs-number">10</span>
-
-puts <span class="hljs-string">"This number is <span class="hljs-subst">#{i}</span>"</span>
-
-<span class="hljs-keyword">end</span></code></pre>
-<p>Notice that <code class="inline">for</code> will always be followed by an <code class="inline">end</code>, and anything in between the <code class="inline">for</code> and <code class="inline">end</code> is a code block. The line <code class="inline">i in 1..10</code> means that we want <code class="inline">i</code> to be values 1, 2, 3, …, 10. When the <code class="inline">for</code> loop starts, <code class="inline">i</code> will start at the value 1 since we have indicated 1 to be the starting point. After running the code block (<code class="inline">puts "This number is #{i}"</code>), <code class="inline">i</code> then becomes 2, 3, and so on so forth. The <code class="inline">for</code> loop with terminate after <code class="inline">i</code> becomes 10. </p>
-<p>Note that the two dots <code class="inline">..</code> is a range operator. Writing <code class="inline">1..10</code> will create a range from 1 to 10, inclusive. Run the code in <code class="inline">example.rb</code>. Feel free to change the values 1 and 10 to test your understanding.</p>
-<h4>Exercise 1</h4>
-<p>Previously you have used a <code class="inline">while</code> loop to find the sum from 1 to a given number. Instead of using <code class="inline">while</code>, write a method call <code class="inline">sum_to</code> which takes in an integer as its argument. In the method, use a <code class="inline">for</code> loop and the assignment operator <code class="inline">+=</code> to find the sum of 1 to the given integer. For example, <code class="inline">sum_to(10)</code> should return the value 55.</p>
-<h4>Exercise 2</h4>
-<p>In the challenge <a href="https://code.nextacademy.com/courses/web-development-bootcamp/challenges/integers-displaying-triangles">“Displaying Triangles”</a>, you have managed to draw an upleft triangle and an downleft triangle. The challenge is now this: using <code class="inline">for</code> loops, write a method <code class="inline">diamond</code> that takes in an integer and a character as its arguments. The output should be diamond. An example is as follows:</p>
-<pre><code class="hljs ruby">diamond(<span class="hljs-number">5</span>, <span class="hljs-string">"*"</span>):
-
-  *
-***
-*****
-*******
-*********
-*******
-*****
-***
-*</code></pre>
-<p>Remember to think in bite-size pieces. Since you are able to draw an upleft and downleft triangle, figure out how to an upright and downright triangle. Then think of how you can combine these 4 shapes together to display a diamond.</p>
-<h4>Exercise 3 (Optional)</h4>
-<p>Finally, write a method that outputs a hollow diamond. An example is as follows:</p>
-<pre><code class="hljs ruby">hollow diamond(<span class="hljs-number">5</span>, <span class="hljs-string">"*"</span>):
-
-  *
-* *
-*   *
-*     *
-*       *
-*     *
-*   *
-* *
-*</code></pre>
+<div id="challenge-instructions"><h3>Algorithm Drill: Roman Numerals (Old-School)</h3><div><h3>Roman Numerals as Representation</h3>
+<p>Have you ever seen a 5? I don’t mean the symbol we write on a piece of paper or print to a screen, but an actual, honest-to-goodness 5?</p>
+<p>Of course not. You’ve seen things that somehow embody five: five apples, five fingers, five weekdays on the calendar, a scrap of paper with “5” written on it, and so forth. Think of all the ways you can represent the integer 5.</p>
+<p>Symbols like 5, “five”, V, and IIIII are one way. If you asked a three-year-old, they might hold up the five fingers on their hand or pull out five pennies from their pocket. Computers encode numbers as a sequence of 0s and 1s called <a href="http://en.wikipedia.org/wiki/Binary_number">binary</a>.</p>
+<p><a href="https://en.wikipedia.org/wiki/Map%25E2%2580%2593territory_relation">The map is not the territory</a>, as they say.</p>
+<h3>Tasks</h3>
+<h4>1. Old-school Roman numerals</h4>
+<p>In the early days of Roman numerals, the Romans didn’t bother with any of this new-fangled subtraction ‘IX’ nonsense. No sir, it was straight addition, biggest to littlest—so 9 was written ‘VIIII’ and so on.</p>
+<p>Write a method <code class="inline">to_roman</code> that when passed an integer between 1 and 3000 (or so) returns a string containing the proper old-school Roman numeral.</p>
+<p>In other words, <code class="inline">to_roman(4)</code> should return the string <code class="inline">'IIII'</code>.</p>
+<p>Make sure to test your method by passing it several inputs whose results you know. Test some simple numbers like <code class="inline">to_roman(1)</code> and more complicated numbers like <code class="inline">to_roman(1646)</code>. This serves as a good sanity check.</p>
+<p>Hint: Use the integer division <code class="inline">/</code> and modulus <code class="inline">%</code> methods.</p>
+<p>For reference, these are the building blocks for how we encode numbers with Roman numerals:</p>
+<pre><code class="ruby hljs">I <span class="hljs-number">1</span>
+V <span class="hljs-number">5</span>
+X <span class="hljs-number">10</span>
+L <span class="hljs-number">50</span>
+C <span class="hljs-number">100</span>
+D <span class="hljs-number">500</span>
+M <span class="hljs-number">1000</span></code></pre>
 </div><div class="checkbox"></div></div>
