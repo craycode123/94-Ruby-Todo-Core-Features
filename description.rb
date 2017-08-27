@@ -1,37 +1,33 @@
-<div><p>In computer science, there are many different ways to search through collections of data. Understanding the various algorithms and patterns for searching and sorting data sets is an essential part of computer science.</p>
-<p>Ruby abstracts many of the lower-level functions of programming by providing us with methods like <code class="inline">Array#index</code>. You don’t need to know <em>how</em> the index of an element is found, you just need to know <em>what</em> it is. In general, the fact that Ruby provides these abstractions is a Good Thing.</p>
-<p>However, it is also useful to understand that there are many different ways to perform a simple task like finding the index of an element in a list. Aside from being important to your knowledge of theory, the searching and sorting algorithms you use will have a significant impact on your program’s performance (how long it takes to execute and how much memory it uses).</p>
-<p>One of the most basic searching algorithms is the <strong>linear search</strong> . In this challenge, you will build a <code class="inline">linear_search</code> method using very basic programming constructs in Ruby. Here is a <a href="https://scratch.mit.edu/projects/72166092/">little game</a> for you play with to understand linear search better.</p>
-<p>Linear search (also called <em>sequential</em> search) is an algorithm for finding a particular value in a list by checking every one of its elements, one at a time and in sequence, until the desired one is found.</p>
-<p><em>Sources:&nbsp;
-</em></p>
-<ol>
-<li><em><a href="http://en.wikipedia.org/wiki/Linear_search">Wikipedia</a>
-</em>
-</li>
-<li><em><a href="http://pragprog.com/book/gwpy/practical-programming">Practical Programming</a>
-</em>
-</li>
-</ol>
-<h3>Task</h3>
-<h4>1. Basic linear search</h4>
-<p>Write a method <code class="inline">linear_search</code> that takes two arguments: an object and an array.</p>
+<div><p>Children who are learning arithmetic sometimes play a number-guessing game:</p>
 <ul>
-<li>It should return the index of the object in the array by going through each element in sequence and returning the index of the first instance of the element.
-  </li>
-<li>If the object searched for does not exist in the array, it should return <code class="inline">nil</code>.
-  </li>
+<li>“I’m thinking of a number between 1 and 100. Can you guess it?”
+</li>
+<li><em>“Is the number less than 50?”</em>
+</li>
+<li>“Yes.”
+</li>
+<li><em>“Is the number less than 25?”</em>
+</li>
+<li>“No.”
+</li>
 </ul>
-<pre><code class="ruby hljs">random_numbers = [<span class="hljs-number">6</span>, <span class="hljs-number">29</span>, <span class="hljs-number">18</span>, <span class="hljs-number">2</span>, <span class="hljs-number">72</span>, <span class="hljs-number">19</span>, <span class="hljs-number">18</span>, <span class="hljs-number">10</span>, <span class="hljs-number">37</span>]
-linear_search(<span class="hljs-number">18</span>, random_numbers)
-<span class="hljs-comment"># =&gt; 2</span>
-linear_search(<span class="hljs-number">9</span>, random_numbers)
-<span class="hljs-comment"># =&gt; nil</span></code></pre>
-<p>Here’s the catch: you can’t use any of Ruby’s built-in <code class="inline">Array</code> or <code class="inline">Enumerable</code> methods <em>except</em> for <code class="inline">Array#[]</code>. You will have to use of the keywords <code class="inline">for</code>, <code class="inline">while</code>, or <code class="inline">until</code>.</p>
-<h4>2. Global linear search</h4>
-<p>Write a new method <code class="inline">global_linear_search</code> that returns an array of <em>all the indices</em> for the object it searches for. In other words, if the object <code class="inline">x</code> is in more than one place in the array, <code class="inline">global_linear_search</code> will return an array containing the index of each occurrence of <code class="inline">x</code>.</p>
-<pre><code class="ruby hljs">bananas_arr = <span class="hljs-string">"bananas"</span>.split(<span class="hljs-regexp">//</span>)
-<span class="hljs-comment"># =&gt; ["b", "a", "n", "a", "n", "a", "s"]</span>
-global_linear_search(<span class="hljs-string">"a"</span>, bananas_arr)
-<span class="hljs-comment"># =&gt; [1, 3, 5]</span></code></pre>
+<p>And so on, halving the interval at each step until only one number is left.</p>
+<p>This technique is known colloquially as the binary chop. It is a well-known technique for searching through a collection. Let’s build it in Ruby.</p>
+<p>Beware that this exercise is harder than it looks. Jon Bentley, in his book Programming Pearls, reports that 90% of professional programmers cannot write a proper implementation of binary search in two hours, and Donald Knuth, in the second volume of his book The Art of Computer Programming, reports that though the first binary search was published in 1946, the first bug-free binary search wasn’t published until 1962.</p>
+<p>If you want to read more, check out the <a href="http://en.wikipedia.org/wiki/Binary_search_algorithm">Wikipedia article</a>.</p>
+<p><cite>Source: <a href="http://pine.fm/LearnToProgram/">Chris Pine, Learn To Program</a>&nbsp;|&nbsp;<a href="http://programmingpraxis.com/2009/03/23/binary-search/">Programming Praxis</a></cite></p>
+<h3>Tasks</h3>
+<h4>Write the algorithm</h4>
+<p>Your first task is to write a method that takes a target number and a <strong>sorted</strong> array of numbers in non-decreasing order and returns either the position of the number in the array, or <code class="inline">-1</code> to indicate the target number is not in the array. For instance, <code class="inline">binary_search(32, [13, 19, 24, 29, 32, 37, 43])</code> should return <code class="inline">4</code>, since <code class="inline">32</code> is the fourth element of the array (counting from zero). Start with pseudocode! What are the steps? What’s the end case? Spell it out before jumping into Ruby. You can’t use <code class="inline">Array#index</code>. Sorry. The point is to build a binary search from scratch, not use Ruby’s built in search methods. Also, don’t use <code class="inline">Array#.include?</code>.</p>
+<p>HINT: Here’s an implementation of binary search in <a href="http://codereview.stackexchange.com/questions/5363/efficient-binary-search">JavaScript</a>. You can start creating your pseudocode with this as a model if you like.</p>
+<h4>Ensuring accuracy</h4>
+<p>Write a suitable test program that shows the accuracy of your binary search method. Test your method against a variety of inputs. Does it always return the correct answer?</p>
+<p>A basic testing program could look like this (yours should test more examples):</p>
+<pre><code class="ruby hljs">test_array = (<span class="hljs-number">100</span>..<span class="hljs-number">200</span>).to_a
+puts binary_search(<span class="hljs-number">135</span>, test_array) == <span class="hljs-number">35</span>
+<span class="hljs-comment"># =&gt; true</span>
+
+test_array = [<span class="hljs-number">13</span>, <span class="hljs-number">19</span>, <span class="hljs-number">24</span>, <span class="hljs-number">29</span>, <span class="hljs-number">32</span>, <span class="hljs-number">37</span>, <span class="hljs-number">43</span>]
+puts binary_search(<span class="hljs-number">35</span>, test_array) == -<span class="hljs-number">1</span>
+<span class="hljs-comment"># =&gt; true</span></code></pre>
 </div>
